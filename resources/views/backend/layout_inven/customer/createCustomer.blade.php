@@ -54,34 +54,35 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label for="address">Address</label>
-                                        <input type="text" id="cust_address" name="cust_address" class="form-control" >
+                                        <input type="text" id="cust_address" name="cust_address" class="form-control" value="{{ old("cust_address") }}" >
                                     </div>
                                 </div>
                                 {{------------------------------------------------------------------------------------}}
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="SuppTel">Telephone</label>
-                                        <input type="text" name="cust_tel" id="cust_tel" class="form-control" required>
+                                        <label for="SuppTel">Telephone number</label>
+                                        <input type="number" name="cust_tel" id="cust_tel" class="form-control" value="{{ old('cust_tel') }}" required>
+                                        <p class="text-danger">{{$errors->first("cust_tel")}}</p>
                                     </div>
                                 </div>
                                 {{------------------------------------------------------------------------------------}}
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="city">City</label>
-                                        <input type="text" name="city" id="city" class="form-control">
+                                        <input type="text" name="city" id="city" class="form-control" value="{{ old('city') }}">
                                     </div>
                                 </div>
                                 {{------------------------------------------------------------------------------------}}
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label for="company">Comapny</label>
-                                        <input type="text" name="company" id="company" class="form-control">
+                                        <input type="text" name="company" id="company" class="form-control"  value="{{ old('company') }}">
                                     </div>
                                 </div>
                             </div>
                         </div>
                         {{--------------------------------------------------------------------------------------------}}
-                        <div class="box-footer pull-right" style="margin-top: 3%">
+                        <div class="box-footer pull-right" style="margin-top: 3%;">
                             <button type="submit" class="btn btn-primary btn-save mybtn">Save</button>
                             <button type="button" class="btn btn-warning btn-reset mybtn" onclick="this.form.reset()">Reset</button>
                             <a href="{{ URL::to('customer/list.html') }}" class="btn btn-danger btn-back mybtn">Back</a>

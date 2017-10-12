@@ -187,6 +187,8 @@ return [
         Laravel\Socialite\SocialiteServiceProvider::class,
         Laravel\Tinker\TinkerServiceProvider::class,
         Yajra\Datatables\DatatablesServiceProvider::class,
+        Intervention\Image\ImageServiceProvider::class,
+        Gloudemans\Shoppingcart\ShoppingcartServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -201,6 +203,7 @@ return [
         App\Providers\HistoryServiceProvider::class,
         App\Providers\MacroServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+
 
     ],
 
@@ -256,10 +259,12 @@ return [
          */
         'Active'      => HieuLe\Active\Facades\Active::class,
         'Breadcrumbs' => DaveJamesMiller\Breadcrumbs\Facade::class,
+        'Cart'        => Gloudemans\Shoppingcart\Facades\Cart::class,
         'Captcha'     => Arcanedev\NoCaptcha\Facades\NoCaptcha::class,
         'Form'        => Collective\Html\FormFacade::class,
         'Gravatar'    => Creativeorange\Gravatar\Facades\Gravatar::class,
         'Html'        => Collective\Html\HtmlFacade::class,
+        'Image'       => Intervention\Image\Facades\Image::class,
         'Socialite'   => Laravel\Socialite\Facades\Socialite::class,
 
     ],

@@ -8,9 +8,22 @@
             </div><!-- /.box tools -->
         </div><!-- /.box-header -->
         <div class="box-body">
-            <div>
-                <a href="{{ URL::to('customer/create.html') }}" class="btn btn-info">Add New Customer</a>
-
+            <div class="row">
+                <div class="col-md-6">
+                    <a href="{{ URL::to('customer/create.html') }}" class="btn btn-info pull-left">Add New Customer</a>
+                </div>
+                <div class="input-group pull-right col-md-6">
+                    <form method="get" action="{{ URL::to('customer/search') }}" role="search" accept-charset="UTF-8">
+                        <div class="form-group">
+                            <div class="input-group col-sm-12 col-xs-12">
+                                <input type="text" name="customerSearch" id="customerSearch" class="form-control" placeholder="Search name, tel, city or company...">
+                                <div class="input-group-btn">
+                                    <button type="submit" class="btn btn-default" id="btnSearch"><i><span class="glyphicon glyphicon-search"></span></i></button>
+                                </div><!-- /itnput-group-btn -->
+                            </div>	<!-- /input-group -->
+                        </div><!-- /form-group -->
+                    </form>
+                </div>
             </div>
             <br>
             <table class="table table-striped">
@@ -40,7 +53,7 @@
                 </tbody>
             </table>
             <div id="paginate">
-                {!! $customers->appends(['txtSearch' => Request::get('txtSearch')])->links() !!}
+                {!! $customers->appends(['customerSearch' => Request::get('customerSearch')])->links() !!}
             </div>
         </div><!-- /.box-body -->
     </div><!--box box-success-->

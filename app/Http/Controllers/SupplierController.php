@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 class SupplierController extends Controller
 {
-    private $suppliers, $date, $limit = 10;
+    private $suppliers, $date, $limit = 7;
     public function __construct(Supplier $suppliers) {
         $this->suppliers = $suppliers;
         $this->date = date('Y-m-d H:i:s');

@@ -147,9 +147,10 @@
                 </ul>
             </li>
             <li>
-                <a href="{{ URL::to('oreder/product') }}">
-                    <i class="fa fa-list"></i>
+                <a href="{{ URL::to('order/list.html') }}">
+                    <i class="glyphicon glyphicon-shopping-cart"></i>
                     <span>Order Product</span>
+                    <span class="badge pull-right">{{ Cart::count() }}</span>
                 </a>
             </li>
         </ul><!-- /.sidebar-menu -->

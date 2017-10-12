@@ -39,9 +39,9 @@
                 @endforeach
                 </tbody>
             </table>
-            {{--<div id="paginate">--}}
-                {{--{!! $supplier->appends(['txtSearch' => Request::get('txtSearch')])->links() !!}--}}
-            {{--</div>--}}
+            <div id="paginate">
+                {!! $suppliers->appends(['txtSearch' => Request::get('txtSearch')])->links() !!}
+            </div>
         </div><!-- /.box-body -->
     </div><!--box box-success-->
 @endsection

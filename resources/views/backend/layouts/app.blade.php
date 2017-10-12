@@ -80,51 +80,15 @@
                 </section><!-- /.content -->
             </div><!-- /.content-wrapper -->
 
-            @include('backend.includes.footer')
+                @include('backend.includes.footer')
         </div><!-- ./wrapper -->
 
         <!-- JavaScripts -->
         @yield('before-scripts')
         <!-- javascripts -->
-        {!!Html::script('vendors/js/jquery.js')!!}
-        {!!Html::script('vendors/js/jquery-ui-1.10.4.min.js')!!}
-        {!!Html::script('vendors/js/jquery-1.8.3.min.js')!!}
-        {!!Html::script('vendors/js/jquery-ui-1.9.2.custom.min.js')!!}
-        <!-- bootstrap -->
-        {!!Html::script('vendors/js/bootstrap.min.js')!!}
-        <!-- nice scroll -->
-        {!!Html::script('vendors/js/jquery.scrollTo.min.js')!!}
-        {!!Html::script('vendors/js/jquery.nicescroll.js')!!}
-        <!-- charts scripts -->
-        {!!Html::script('vendors/assets/jquery-knob/js/jquery.knob.js')!!}
-        {!!Html::script('vendors/js/jquery.sparkline.js')!!}
-        {!!Html::script('vendors/assets/jquery-easy-pie-chart/jquery.easy-pie-chart.js')!!}
-        {!!Html::script('vendors/js/owl.carousel.js')!!}
-        <!-- jQuery full calendar -->
-        {!!Html::script('vendors/js/fullcalendar.min.js')!!}<!-- Full Google Calendar - Calendar -->
-        {!!Html::script('vendors/assets/fullcalendar/fullcalendar/fullcalendar.js')!!}
-        <!--script for this page only-->
-        {!!Html::script('vendors/js/calendar-custom.js')!!}
-        {!!Html::script('vendors/js/jquery.rateit.min.js')!!}
-        <!-- custom select -->
-        {!!Html::script('vendors/js/jquery.customSelect.min.js')!!}
-        {!!Html::script('vendors/assets/chart-master/Chart.js')!!}
-        <!--custome script for all page-->
-        {!!Html::script('vendors/js/scripts.js')!!}
-        <!-- custom script for this page-->
-        {!!Html::script('vendors/js/sparkline-chart.js')!!}
-        {!!Html::script('vendors/js/easy-pie-chart.js')!!}
-        {!!Html::script('vendors/js/jquery-jvectormap-1.2.2.min.js')!!}
-        {!!Html::script('vendors/js/jquery-jvectormap-world-mill-en.js')!!}
-        {!!Html::script('vendors/js/xcharts.min.js')!!}
-        {!!Html::script('vendors/js/jquery.autosize.min.js')!!}
-        {!!Html::script('vendors/js/jquery.placeholder.min.js')!!}
-        {!!Html::script('vendors/js/gdp-data.js')!!}
-        {!!Html::script('vendors/js/morris.min.js')!!}
-        {!!Html::script('vendors/js/sparklines.js')!!}
-        {!!Html::script('vendors/js/charts.js')!!}
-        {!!Html::script('vendors/js/jquery.slimscroll.min.js')!!}
+        {{--{{ Html::script('js/jquery-1.12.4.js') }}--}}
         {{ Html::script(mix('js/backend.js')) }}
         @yield('after-scripts')
     </body>
+
 </html>

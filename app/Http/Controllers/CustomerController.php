@@ -3,14 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\CustomerRequest;
 use App\Customer;
 class CustomerController extends Controller
 {
-    private $customers, $date, $limit = 10;
+    private $customers, $date, $limit = 7;
 
     public function __construct( Customer $customers){
         $this->customers = $customers;
-
         $this->date = date('Y-m-d H:i:s');
     }
 
@@ -41,7 +41,7 @@ class CustomerController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CustomerRequest $request)
     {
         $this->customers->cust_name     = $request->cust_name;
         $this->customers->cust_gender   = $request->sex;
@@ -105,7 +105,7 @@ class CustomerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(CustomerRequest $request)
     {
         $id = preg_replace( '#[^0-9]#', '', $request->cust_id);
 
@@ -139,5 +139,24 @@ class CustomerController extends Controller
 
         Customer::find($id)->delete();
         return redirect('customer/list.html');
+    }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|\Illuminate\View\View
+     */
+    public function search(Request $request) {
+        $customerKey = $request->get('customerSearch');
+        if(!empty($customerKey)) {
+            $customers = $this->customers->where('cust_name', 'like', '%'.$customerKey.'%')
+                                         ->orwhere('cust_tel', 'like', '%'.$customerKey.'%')
+                                         ->orwhere('city', 'like', '%'.$customerKey.'%')
+                                         ->orwhere('company', 'like', '%'.$customerKey.'%')
+                                         ->orderBy('cust_id', 'desc')
+                                         ->paginate($this->limit);
+            return view('backend.layout_inven.customer.reportCustomer', compact('customers'));
+        }else {
+            return redirect('customer/list.html');
+        }
     }
 }

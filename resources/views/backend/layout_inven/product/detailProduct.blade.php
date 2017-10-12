@@ -20,6 +20,7 @@
                     Group : {{is_null($product->group)?'N/A': $product->group->gp_name}}<br>
                     Category : {{is_null($product->category)?'N/A': $product->category->cat_name}}<br>
                     Brand : {{is_null($product->brand)?'N/A': $product->brand->brand_name}}
+                    <img src="product_img/{{$product->pro_photo}}" alt="qwerty">
                     {{--{{$product->pro_photo}}--}}
                 </div><!-- /.box-body -->
                 <div class="box-footer">

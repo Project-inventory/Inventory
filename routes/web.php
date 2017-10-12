@@ -48,7 +48,7 @@ Route::resource('DelGroup', 'DeleteGroup');
  * for product
  */
 Route::get('product/list.html',     ['uses'=>'ProductController@index']);
-Route::get('product/create.html',   ['uses'=>'ProductController@create']);
+Route::get('product/create.html',   ['uses'=>'ProductController@reate']);
 Route::post('product/store',        ['uses'=>'ProductController@store']);
 Route::get('product/show/{id}',     ['uses'=>'ProductController@show']);
 Route::get('product/edit/{id}',     ['uses'=>'ProductController@edit']);
@@ -87,14 +87,9 @@ Route::get('customer/search',       ['uses'=>'CustomerController@search']);
  * for order
  */
 Route::get('order/list.html',   ['uses'=>'OrderController@index']);
-Route::get('order/create.html', ['uses'=>'OrderController@create']);
-Route::get('order/store',       ['uses'=>'OrderController@store']);
-Route::get('order/show/{id}',   ['uses'=>'OrderController@show']);
-Route::get('order/edit/{id}',   ['uses'=>'OrderController@edit']);
-Route::post('order/update',     ['uses'=>'OrderController@update']);
-Route::get('order/delete/{id}', ['uses'=>'OrderController@destroy']);
 Route::get('order/search',      ['uses'=>'OrderController@search']);
+Route::get('order/update/{id}', ['uses'=>'OrderController@update']);
+Route::resource('/order', 'OrderController');
 
-Route::get('oreder/product', ['uses'=>'OrderController@orderProduct']);
 
 

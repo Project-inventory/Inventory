@@ -15,7 +15,7 @@
                     Tel : {{$customer->cust_tel}}<br>
                     City : {{$customer->city}}<br>
                     Company : {{$customer->company}}<br>
-                    Description :{{$customer->registerDate}}
+                    Creates Date :{{$customer->registerDate}}
                 </div><!-- /.box-body -->
                 <div class="box-footer">
                     <a href="{{ URL::to('customer/list.html') }}" class="btn btn-danger btn-back mybtn pull-right">Back</a>
