@@ -20,8 +20,8 @@
             {{ Form::text('q', Request::get('q'), ['class' => 'form-control', 'required' => 'required', 'placeholder' => trans('strings.backend.general.search_placeholder')]) }}
 
             <span class="input-group-btn">
-                    <button type='submit' id='search-btn' class="btn btn-flat"><i class="fa fa-search"></i></button>
-                  </span><!--input-group-btn-->
+                <button type='submit' id='search-btn' class="btn btn-flat"><i class="fa fa-search"></i></button>
+              </span><!--input-group-btn-->
         </div><!--input-group-->
     {{ Form::close() }}
     <!-- /.search form -->
@@ -36,9 +36,91 @@
                     <span>{{ trans('menus.backend.sidebar.dashboard') }}</span>
                 </a>
             </li>
+{{--================================================================================================================--}}
 
+            <li class="{{ active_class(Active::checkUriPattern('admin/customers')) }}">
+                <a href="{{ route('admin.customers.index') }}">
+                    <i class="glyphicon glyphicon-user"></i>
+                    <span>Customers</span>
+                </a>
+            </li>
+
+            <li class="{{ active_class(Active::checkUriPattern('admin/sales')) }}">
+                <a href="{{ route('admin.sales.index') }}">
+                    <i class="fa fa-usd" aria-hidden="true"></i>
+                    <span>Sales</span>
+                </a>
+            </li>
+
+            <li class="{{ active_class(Active::checkUriPattern('admin/products')) }}">
+                <a href="{{ route('admin.products.index')}}">
+                    <i class="fa fa-cubes" aria-hidden="true"></i>
+                    <span>Products</span>
+                </a>
+            </li>
+
+            <li class="{{ active_class(Active::checkUriPattern('admin/suppliers')) }}">
+                <a href="{{ route('admin.suppliers.index') }}">
+                    <i class="fa fa-truck" aria-hidden="true"></i>
+                    <span>Suppliers</span>
+                </a>
+            </li>
+
+            <li class="{{ active_class(Active::checkUriPattern('admin/sellings')) }}">
+                <a href="{{ route('admin.sellings.index') }}">
+                    <i class="glyphicon glyphicon-shopping-cart"></i>
+                    <span>Order Product</span>
+                    <span class="badge pull-right">{{ Cart::count() }}</span>
+                </a>
+            </li>
+{{--================================================================================================================--}}
+            <li class="{{ active_class(Active::checkUriPattern('admin/configurations/*')) }} treeview">
+                <a href="#">
+                    <i class="fa fa-cogs" aria-hidden="true"></i>
+                    <span>Configuration</span>
+                    <i class="fa fa-angle-left pull-right"></i>
+
+                    @if ($pending_approval > 0)
+                        <span class="label label-danger pull-right">{{ $pending_approval }}</span>
+                    @else
+                        <i class="fa fa-angle-left pull-right"></i>
+                    @endif
+                </a>
+
+                <ul class="treeview-menu {{ active_class(Active::checkUriPattern('admin/configurations/*'), 'menu-open') }}" style="display: none; {{ active_class(Active::checkUriPattern('admin/configurations/*'), 'display: block;') }}">
+                    <li class="{{ active_class(Active::checkUriPattern('admin/configurations/brands*')) }}">
+                        <a href="{{ route('admin.brands.index') }}">
+                            <i class="fa fa-star-o"></i>
+                            <span>Brand</span>
+
+                            @if ($pending_approval > 0)
+                                <span class="label label-danger pull-right">{{ $pending_approval }}</span>
+                            @endif
+                        </a>
+                    </li>
+
+                    <li class="{{ active_class(Active::checkUriPattern('admin/configurations/categories*')) }}">
+                        <a href="{{ route('admin.categories.index') }}">
+                            <i class="fa fa-tags"></i>
+                            <span>Category</span>
+
+                            @if ($pending_approval > 0)
+                                <span class="label label-danger pull-right">{{ $pending_approval }}</span>
+                            @endif
+                        </a>
+                    </li>
+
+                    <li class="{{ active_class(Active::checkUriPattern('admin/configurations/groups*')) }}">
+                        <a href="{{ route('admin.groups.index') }}">
+                            <i class="fa fa-tasks"></i>
+                            <span>Group</span>
+                        </a>
+                    </li>
+
+                </ul>
+            </li>
+{{--================================================================================================================--}}
             <li class="header">{{ trans('menus.backend.sidebar.system') }}</li>
-
             @role(1)
             <li class="{{ active_class(Active::checkUriPattern('admin/access/*')) }} treeview">
                 <a href="#">
@@ -70,6 +152,7 @@
                             <span>{{ trans('labels.backend.access.roles.management') }}</span>
                         </a>
                     </li>
+
                 </ul>
             </li>
             @endauth
@@ -97,62 +180,6 @@
                 </ul>
             </li>
 
-            <li class="{{ active_class(Active::checkUriPattern('admin/log-viewer*')) }} treeview">
-                <a href="#">
-                    <i class="fa fa-list"></i>
-                    <span>Form Ctreate</span>
-                    <i class="fa fa-angle-left pull-right"></i>
-                </a>
-                <ul class="treeview-menu {{ active_class(Active::checkUriPattern('admin/log-viewer*'), 'menu-open') }}" style="display: none; {{ active_class(Active::checkUriPattern('admin/log-viewer*'), 'display: block;') }}">
-                    <li>
-                        <a href="{{ route('showFields') }}">
-                            <i class="fa fa-list"></i>
-                            <span>Add Fields</span>
-                        </a>
-                    </li>
-                </ul>
-            </li>
-
-            <li class="{{ active_class(Active::checkUriPattern('admin/log-viewer*')) }} treeview">
-                <a href="#">
-                    <i class="fa fa-list"></i>
-                    <span>List</span>
-                    <i class="fa fa-angle-left pull-right"></i>
-                </a>
-                <ul class="treeview-menu {{ active_class(Active::checkUriPattern('admin/log-viewer*'), 'menu-open') }}" style="display: none; {{ active_class(Active::checkUriPattern('admin/log-viewer*'), 'display: block;') }}">
-                    <li>
-                        <a href="{{ URL::to('customer/list.html') }}">
-                            <i class="fa fa-list"></i>
-                            <span>Customer's List</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{{ URL::to('order/list.html') }}">
-                            <i class="fa fa-list"></i>
-                            <span>Order's List</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{{ URL::to('product/list.html') }}">
-                            <i class="fa fa-list"></i>
-                            <span>Product's List</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{{ URL::to('supplier/list.html') }}">
-                            <i class="fa fa-list"></i>
-                            <span>Supplier's List</span>
-                        </a>
-                    </li>
-                </ul>
-            </li>
-            <li>
-                <a href="{{ URL::to('order/list.html') }}">
-                    <i class="glyphicon glyphicon-shopping-cart"></i>
-                    <span>Order Product</span>
-                    <span class="badge pull-right">{{ Cart::count() }}</span>
-                </a>
-            </li>
         </ul><!-- /.sidebar-menu -->
     </section><!-- /.sidebar -->
 </aside>

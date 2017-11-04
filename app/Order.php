@@ -9,7 +9,17 @@ use Illuminate\Database\Eloquent\Model;
 class Order extends Model
 {
     protected $table = 'orders';
-    protected $fillable = ['pro_id', 'cust_id', 'order_quantity', 'order_amount', 'discount', 'total', 'order_date', 'user_id' ];
+    protected $fillable = [ 'pro_id',
+                            'cust_id',
+                            'order_quantity',
+                            'order_tax',
+                            'order_subtotal',
+                            'order_amount',
+                            'paid',
+                            'discount',
+                            'lack',
+                            'order_date',
+                            'user_name' ];
     protected $primaryKey = 'order_id';
     public $timestamps = false;
     

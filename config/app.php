@@ -180,15 +180,16 @@ return [
          */
         Arcanedev\LogViewer\LogViewerServiceProvider::class,
         Arcanedev\NoCaptcha\NoCaptchaServiceProvider::class,
+        Barryvdh\DomPDF\ServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
         Creativeorange\Gravatar\GravatarServiceProvider::class,
         DaveJamesMiller\Breadcrumbs\ServiceProvider::class,
+        Gloudemans\Shoppingcart\ShoppingcartServiceProvider::class,
         HieuLe\Active\ActiveServiceProvider::class,
+        Intervention\Image\ImageServiceProvider::class,
         Laravel\Socialite\SocialiteServiceProvider::class,
         Laravel\Tinker\TinkerServiceProvider::class,
         Yajra\Datatables\DatatablesServiceProvider::class,
-        Intervention\Image\ImageServiceProvider::class,
-        Gloudemans\Shoppingcart\ShoppingcartServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -266,6 +267,8 @@ return [
         'Html'        => Collective\Html\HtmlFacade::class,
         'Image'       => Intervention\Image\Facades\Image::class,
         'Socialite'   => Laravel\Socialite\Facades\Socialite::class,
+        'PDF'         => Barryvdh\DomPDF\Facade::class,
+        'Datatables'  => Yajra\Datatables\Facades\Datatables::class
 
     ],
 

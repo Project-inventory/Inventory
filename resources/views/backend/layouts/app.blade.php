@@ -19,12 +19,6 @@
         {!!Html::style('vendors/css/bootstrap.min.css')!!}
         <!-- font icon -->
         {!!Html::style('vendors/css/font-awesome.min.css')!!}
-        {!!Html::style('vendors/css/elegant-icons-style.css')!!}
-        <!-- full calendar css-->
-        {!!Html::style('vendors/assets/fullcalendar/fullcalendar/bootstrap-fullcalendar.css')!!}
-        {!!Html::style('vendors/assets/fullcalendar/fullcalendar/fullcalendar.css')!!}
-        <!-- easy pie chart-->
-        {!!Html::style('vendors/assets/jquery-easy-pie-chart/jquery.easy-pie-chart.css')!!}
         @yield('style')
         {{--@yield('before-styles')--}}
 
@@ -35,6 +29,8 @@
         @else
             {{ Html::style(mix('css/backend.css')) }}
         @endif
+            {!!Html::style('css/datatable.css') !!}
+            {!!Html::style('node_modules/select2/dist/css/select2.min.css') !!}
 
         @yield('after-styles')
 
@@ -66,7 +62,7 @@
                     @yield('page-header')
 
                     {{-- Change to Breadcrumbs::render() if you want it to error to remind you to create the breadcrumbs for the given route --}}
-                    {!! Breadcrumbs::renderIfExists() !!}
+                    {{--{!! Breadcrumbs::renderIfExists() !!}--}}
                 </section>
 
                 <!-- Main content -->
@@ -84,10 +80,14 @@
         </div><!-- ./wrapper -->
 
         <!-- JavaScripts -->
+
         @yield('before-scripts')
-        <!-- javascripts -->
-        {{--{{ Html::script('js/jquery-1.12.4.js') }}--}}
+        <!-- DataTables -->
         {{ Html::script(mix('js/backend.js')) }}
+        {{ Html::script("js/datatable.js") }}
+        {{ Html::script("js/datatable.bootstrap.js") }}
+        {{ Html::script("js/bootstrap-confirmation.js") }}
+        {!!Html::script('node_modules/select2/dist/js/select2.min.js') !!}
         @yield('after-scripts')
     </body>
 

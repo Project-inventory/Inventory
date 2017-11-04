@@ -14,8 +14,18 @@ use App\Order;
 class Product extends Model
 {
     protected $table = 'products';
-    protected $fillable = [ 'pro_name','pro_unit','pro_quantity','pro_date_storage','pro_price',
-                            'pro_barcode','	pro_expiry','pro_tax','	pro_photo','gp_id','cat_id','brand_id'];
+    protected $fillable = [ 'pro_name',
+                            'pro_unit',
+                            'pro_quantity',
+                            'pro_date_storage',
+                            'pro_price',
+                            'pro_barcode',
+                            'pro_expiry',
+                            'pro_tax',
+                            'pro_photo',
+                            'gp_id',
+                            'cat_id',
+                            'brand_id'];
     protected $primaryKey = 'pro_id';
     public $timestamps = false;
 
