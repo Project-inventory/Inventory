@@ -1,6 +1,15 @@
 @extends('backend.layouts.app')
+
+@section('page-header')
+    <h1>Supplier<small>Edit the supplier record</small></h1>
+    <ol class="breadcrumb">
+        <li><a href="{{ route('admin.dashboard') }}"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="{{ route('admin.suppliers.index') }}">Suppliers</a></li>
+        <li class="active">Edit</li>
+    </ol>
+@endsection
+
 @section('content')
-    @include('backend.layout_inven.css.customStyle')
     <div class="row">
         <div class="col-md-12">
             <p class="text-center">{!! session('message') !!}</p>
@@ -10,7 +19,7 @@
         <div class="col-lg-12">
             <div class="box box-info">
                 <div class="box-header with-border">
-                    <h3 class="box-title"><b></i>Add New Supplier</b></h3>
+                    <h3 class="box-title"><b></i>Edit Supplier</b></h3>
                 </div>
 
                 <div class="box-body" style="padding-bottom: 4px">
@@ -31,14 +40,14 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="suppCompany">Supplier Company</label>
-                                        <input type="text" name="ven_company" id="ven_company" class="form-control" value="{{$supplier->ven_company}}">
+                                        <input type="text" name="ven_company" id="ven_company" class="form-control" value="{{ is_null($supplier->ven_company)?'N/A':$supplier->ven_company }}">
                                     </div>
                                 </div>
                                 {{------------------------------------------------------------------------------------}}
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label for="address">Address</label>
-                                        <input type="text" id="ven_address" name="ven_address" class="form-control" value="{{$supplier->ven_address}}">
+                                        <input type="text" id="ven_address" name="ven_address" class="form-control" value="{{ is_null($supplier->ven_address)?'N/A':$supplier->ven_address}}">
                                     </div>
                                 </div>
                                 {{------------------------------------------------------------------------------------}}
@@ -52,21 +61,21 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="suppWeb">Website</label>
-                                        <input type="text" name="ven_website" id="ven_website" class="form-control" value="{{$supplier->ven_website}}">
+                                        <input type="text" name="ven_website" id="ven_website" class="form-control" value="{{ is_null($supplier->ven_website)?'N/A':$supplier->ven_website }}">
                                     </div>
                                 </div>
                                 {{------------------------------------------------------------------------------------}}
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label for="SuppStatus">Status</label>
-                                        <textarea name="ven_status" id="ven_status" cols="30" rows="5" class="form-control">{{$supplier->ven_status}}</textarea>
+                                        <textarea name="ven_status" id="ven_status" cols="30" rows="5" class="form-control">{{ is_null($supplier->ven_status)?'N/A':$supplier->ven_status }}</textarea>
                                     </div>
                                 </div>
                                 {{------------------------------------------------------------------------------------}}
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label for="SuppDes">Description</label>
-                                        <textarea name="ven_description" id="ven_description" cols="30" rows="5" class="form-control">{{$supplier->ven_description}}</textarea>
+                                        <textarea name="ven_description" id="ven_description" cols="30" rows="5" class="form-control">{{ is_null($supplier->ven_description)?'N/A':$supplier->ven_description }}</textarea>
                                     </div>
                                 </div>
                             </div>

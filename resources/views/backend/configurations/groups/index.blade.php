@@ -55,6 +55,9 @@
         </div>
     </div>
 
+    @foreach( $groups as $key => $group)
+        @include('backend.configurations.groups.edit')
+    @endforeach
     @include('backend.configurations.popup.popupGroup')
 
 @endsection

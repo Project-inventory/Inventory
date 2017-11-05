@@ -29,10 +29,10 @@
                 <thead>
                 <tr>
                     <th>#</th>
-                    <th>Product Name</th>
-                    <th>Customer Name</th>
+                    <th>Product id</th>
+                    <th>Customer id</th>
                     <th>Quantity</th>
-                    <th>Amount</th>
+                    <th>Date</th>
                     <th>Action</th>
                 </tr>
                 </thead>
@@ -42,9 +42,9 @@
                 </tbody>
             </table>
         </div><!-- /.box-body -->
-        {{--@foreach($sales as $key=>$sales)--}}
-            {{--@include('backend.sales.popup.popupView')--}}
-        {{--@endforeach--}}
+        @foreach($orders as $key=>$order)
+            @include('backend.sales.popup.popupView')
+        @endforeach
     </div><!--box box-success-->
 @endsection
 
@@ -58,10 +58,10 @@
                     ajax: 'http://siyen.dev:8080/Inventory/public/admin/sales/get-sales',
                     columns: [
                         {data: 0, name: 'order_id'},
-                        {data: 1, name: 'pro_name'},
-                        {data: 2, name: 'cust_name'},
+                        {data: 1, name: 'pro_id'},
+                        {data: 2, name: 'cust_id'},
                         {data: 3, name: 'order_quantity'},
-                        {data: 4, name: 'order_amount'},
+                        {data: 4, name: 'order_date'},
                         {data: 5, name: 'action'}
                     ]
                 });

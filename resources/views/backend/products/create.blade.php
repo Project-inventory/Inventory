@@ -1,4 +1,14 @@
 @extends('backend.layouts.app')
+
+@section('page-header')
+    <h1>Products<small>Add new product record</small></h1>
+    <ol class="breadcrumb">
+        <li><a href="{{ route('admin.dashboard') }}"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="{{ route('admin.products.index') }}">Products</a></li>
+        <li class="active">Add new product</li>
+    </ol>
+@endsection
+
 @section('content')
     <div class="row">
         <div class="col-md-12">
@@ -43,7 +53,6 @@
                                                                accept="image/*"/>
                                                     </i>
                                                 </label>
-
                                             </div>
                                         </td>
                                     </tr>
@@ -85,7 +94,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="barcode">Barcode</label>
-                                    <input type="text" name="pro_barcode" id="pro_barcode" class="form-control">
+                                    <input type="text" name="pro_barcode" id="pro_barcode" class="form-control" required>
                                 </div>
                             </div>
                             {{------------------------------------------------------------------------------------}}
@@ -105,38 +114,32 @@
 
                             <div class="col-sm-4">
                                 <label for="group">Group</label>
-                                <div class="input-group">
-                                    <select name="gp_id" id="gp_id" class="form-control">
-                                        <option value=" ">-------------------------------------------------</option>
-                                        @foreach($groups as $group=>$value)
-                                            <option value="{{ $value->gp_id}}">{{ $value->gp_name }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
+                                <select name="gp_id" id="gp_id" class="form-control">
+                                    <option value="N/A"></option>
+                                    @foreach($groups as $group=>$value)
+                                        <option value="{{ $value->gp_id}}">{{ $value->gp_name }}</option>
+                                    @endforeach
+                                </select>
                             </div>
 
                             <div class="col-sm-4">
                                 <label for="cattegory">Category</label>
-                                <div class="input-group">
-                                    <select name="cat_id" id="cat_id" class="form-control">
-                                        <option value=" ">-------------------------------------------------</option>
-                                        @foreach($categories as $category=>$value)
-                                            <option value="{{ $value->cat_id}}">{{ $value->cat_name }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
+                                <select name="cat_id" id="cat_id" class="form-control">
+                                    <option value="N/A"></option>
+                                    @foreach($categories as $category=>$value)
+                                        <option value="{{ $value->cat_id}}">{{ $value->cat_name }}</option>
+                                    @endforeach
+                                </select>
                             </div>
 
                             <div class="col-sm-4">
                                 <label for="brand">Brand</label>
-                                <div class="input-group">
-                                    <select name="brand_id" id="brand_id" class="form-control">
-                                        <option value=" ">-------------------------------------------------</option>
-                                        @foreach($brands as $brand=>$value)
-                                            <option value="{{ $value->brands_id}}">{{ $value->brand_name }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
+                                <select name="brand_id" id="brand_id" class="form-control">
+                                    <option value="N/A"></option>
+                                    @foreach($brands as $brand=>$value)
+                                        <option value="{{ $value->brands_id}}">{{ $value->brand_name }}</option>
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
                     </div>
@@ -151,21 +154,38 @@
         </div>
     </div>
 </div>
-<script type="text/javascript">
+@endsection
 
-    function readURL(input) {
-        if (input.files && input.files[0]) {
-            var reader = new FileReader();
+@section('after-scripts')
+    <script type="text/javascript">
+        $('#gp_id').select2({
+            placeholder: 'select a name',
+            allowClear: true
+        });
 
-            reader.onload = function (e) {
-                $('#blah')
-                        .attr('src', e.target.result)
-                        .width(228)
-                        .height(203);
-            };
+        $('#cat_id').select2({
+            placeholder: 'select a name',
+            allowClear: true
+        });
 
-            reader.readAsDataURL(input.files[0]);
+        $('#brand_id').select2({
+            placeholder: 'select a name',
+            allowClear: true
+        });
+
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#blah')
+                            .attr('src', e.target.result)
+                            .width(228)
+                            .height(203);
+                };
+
+                reader.readAsDataURL(input.files[0]);
+            }
         }
-    }
-</script>
+    </script>
 @endsection

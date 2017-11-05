@@ -1,6 +1,15 @@
 @extends('backend.layouts.app')
+
+@section('page-header')
+    <h1>Customers<small>Add new customer record</small></h1>
+    <ol class="breadcrumb">
+        <li><a href="{{ route('admin.dashboard') }}"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="{{ route('admin.customers.index') }}">Customers</a></li>
+        <li class="active">Add new customer</li>
+    </ol>
+@endsection
+
 @section('content')
-    @include('backend.layout_inven.css.customStyle')
     <div class="row">
         <div class="col-md-12">
             <p class="text-center">{!! session('message') !!}</p>
@@ -29,32 +38,18 @@
                                 {{------------------------------------------------------------------------------------}}
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <fieldset>
-                                            <legend>Gender</legend>
-                                            <table class="tbl-gender">
-                                                <tr class="tr-gender">
-                                                    <td class="td-gender">
-                                                        <label for="male">
-                                                            <input type="radio" id="sex" name="sex" value="male" required>
-                                                            Male
-                                                        </label>
-                                                    </td>
-                                                    <td class="td-gender">
-                                                        <label for="female">
-                                                            <input type="radio" id="sex" name="sex" value="female" required>
-                                                            Female
-                                                        </label>
-                                                    </td>
-                                                </tr>
-                                            </table>
-                                        </fieldset>
+                                        <label for="sex">Gender</label>
+                                        <select name="cust_gender" id="cust_gender" class="form-control" required>
+                                            <option value="male">Male</option>
+                                            <option value="female">Female</option>
+                                        </select>
                                     </div>
                                 </div>
                                 {{------------------------------------------------------------------------------------}}
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label for="address">Address</label>
-                                        <input type="text" id="cust_address" name="cust_address" class="form-control" value="{{ old("cust_address") }}" >
+                                        <input type="text" id="cust_address" name="cust_address" class="form-control" value="{{ old("cust_address") }}">
                                     </div>
                                 </div>
                                 {{------------------------------------------------------------------------------------}}
@@ -73,10 +68,20 @@
                                     </div>
                                 </div>
                                 {{------------------------------------------------------------------------------------}}
-                                <div class="col-md-12">
+                                <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="company">Comapny</label>
                                         <input type="text" name="company" id="company" class="form-control"  value="{{ old('company') }}">
+                                    </div>
+                                </div>
+                                {{------------------------------------------------------------------------------------}}
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="company">Status</label>
+                                        <select name="status" id="status" class="form-control" required>
+                                            <option value="not member">Not Member</option>
+                                            <option value="member">Member</option>
+                                        </select>
                                     </div>
                                 </div>
                             </div>
@@ -91,4 +96,16 @@
             </div>
         </div>
     </div>
+@endsection
+
+
+@section('after-scripts')
+    <script type="text/javascript">
+
+        $('#cust_gender').select2({
+            placeholder: 'select a name',
+            allowClear: true
+        });
+
+    </script>
 @endsection

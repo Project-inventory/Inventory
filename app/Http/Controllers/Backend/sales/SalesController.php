@@ -10,6 +10,10 @@ use Yajra\Datatables\Facades\Datatables;
 
 class SalesController extends Controller
 {
+    private $orders;
+    public function __construct( Order $orders){
+        $this->orders = $orders;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -17,8 +21,7 @@ class SalesController extends Controller
      */
     public function index()
     {
-        $orders = Order::join('products', 'products.pro_id', '=', 'orders.pro_id')
-                ->join('customers', 'customers.cust_id', '=', 'orders.cust_id');
+        $orders = $this->orders->all();
         return view('backend.sales.index', compact('orders'));
     }
 
@@ -90,15 +93,14 @@ class SalesController extends Controller
 
     public function getSales ()
     {
-        $orders = Order::join('products', 'products.pro_id', '=', 'orders.pro_id')
-            ->join('customers', 'customers.cust_id', '=', 'orders.cust_id')
-            ->select('order_id', 'pro_name', 'cust_name', 'order_quantity', 'order_amount' );
+        $orders = $this->orders
+            ->select(['order_id', 'pro_id', 'cust_id', 'order_quantity', 'order_date']);
         return Datatables::of($orders)
             ->addColumn('action', function ($order) {
                 return '<button class="btn btn-info btn-xs" data-toggle="modal" data-target="#view'.$order->order_id.'"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></button>';
             })
             ->escapeColumns(['action'])
-            ->editColumn('order_amount', '$ {{number_format($order_amount, 2)}}')
+            ->editColumn('cust_id', '{{ is_null($cust_id)?"N/A":$cust_id }}')
             ->make();
     }
 }

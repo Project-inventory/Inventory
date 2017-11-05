@@ -15,16 +15,19 @@
                         <p>City :</p>
                         <p>Company :</p>
                         <p>Creates Date :</p>
+                        <p>Status</p>
                         <p>Address :</p>
                     </div>
                     <div class="box-right col-md-9">
                         <p>{{ $customer->cust_name }}</p>
                         <p>{{$customer->cust_gender}}</p>
                         <p>{{ $customer->cust_tel }}</p>
-                        <p>{{ $customer->city }}</p>
-                        <p>{{ $customer->company }}</p>
+                        <p>{{ is_null($customer->city)? 'N/A':$customer->city }}</p>
+                        <p>{{ is_null($customer->company)? 'N/A':$customer->company }}</p>
                         <p>{{ $customer->registerDate }}</p>
-                        <address>{{ $customer->cust_address }}</address>
+                        <p>{{ $customer->status }}</p>
+
+                        <address>{{ is_null($customer->cust_address)? 'N/A':$customer->cust_address }}</address>
                     </div>
                 </div>
                 <div class="modal-footer">

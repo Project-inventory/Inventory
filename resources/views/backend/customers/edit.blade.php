@@ -1,6 +1,15 @@
 @extends('backend.layouts.app')
+
+@section('page-header')
+    <h1>Customers<small>Edit customers record</small></h1>
+    <ol class="breadcrumb">
+        <li><a href="{{ route('admin.dashboard') }}"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="{{ route('admin.customers.index') }}">Customers</a></li>
+        <li class="active">Edit</li>
+    </ol>
+@endsection
+
 @section('content')
-    @include('backend.layout_inven.css.customStyle')
     <div class="row">
         <div class="col-md-12">
             <p class="text-center">{!! session('message') !!}</p>
@@ -45,7 +54,7 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label for="address">Address</label>
-                                        <input type="text" id="cust_address" name="cust_address" class="form-control" value="{{$customer->cust_address}}">
+                                        <input type="text" id="cust_address" name="cust_address" class="form-control" value="{{ is_null($customer->cust_address)?'N/A':$customer->cust_address }}">
                                     </div>
                                 </div>
                                 {{------------------------------------------------------------------------------------}}
@@ -59,14 +68,29 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="city">City</label>
-                                        <input type="text" name="city" id="city" class="form-control" value="{{$customer->city}}">
+                                        <input type="text" name="city" id="city" class="form-control" value="{{is_null($customer->city)?'N/A':$customer->city}}">
                                     </div>
                                 </div>
                                 {{------------------------------------------------------------------------------------}}
-                                <div class="col-md-12">
+                                <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="company">Comapny</label>
-                                        <input type="text" name="company" id="company" class="form-control" value="{{$customer->company}}">
+                                        <input type="text" name="company" id="company" class="form-control" value="{{is_null($customer->company)?'N/A':$customer->company}}">
+                                    </div>
+                                </div>
+                                {{------------------------------------------------------------------------------------}}
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="company">Status</label>
+                                        <select name="status" id="status" class="form-control" required>
+                                            @if($customer->status == 'not member')
+                                                <option value="not member" selected>Not Member</option>
+                                                <option value="member">Member</option>
+                                            @else
+                                                <option value="not member">Not Member</option>
+                                                <option value="member" selected>Member</option>
+                                            @endif
+                                        </select>
                                     </div>
                                 </div>
                             </div>
@@ -81,4 +105,15 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('after-scripts')
+    <script type="text/javascript">
+
+        $('#cust_gender').select2({
+            placeholder: 'select a name',
+            allowClear: true
+        });
+
+    </script>
 @endsection

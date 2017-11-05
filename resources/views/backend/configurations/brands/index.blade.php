@@ -48,12 +48,12 @@
                         </tbody>
                     </table>
                 </div><!-- /.box-body -->
-                <div class="box-footer">
-
-                </div>
             </div>
         </div>
     </div>
+    @foreach($brands as $key => $brand)
+        @include('backend.configurations.brands.edit')
+    @endforeach
 
     @include('backend.configurations.popup.popupBrand')
 

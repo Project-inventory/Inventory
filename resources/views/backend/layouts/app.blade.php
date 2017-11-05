@@ -31,8 +31,11 @@
         @endif
             {!!Html::style('css/datatable.css') !!}
             {!!Html::style('node_modules/select2/dist/css/select2.min.css') !!}
+            {!!Html::style('node_modules/sweetalert2/dist/sweetalert2.min.css') !!}
 
         @yield('after-styles')
+        {!!Html::style('node_modules/highcharts/css/highcharts.css') !!}
+
 
         <!-- Html5 Shim and Respond.js IE8 support of Html5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -87,8 +90,16 @@
         {{ Html::script("js/datatable.js") }}
         {{ Html::script("js/datatable.bootstrap.js") }}
         {{ Html::script("js/bootstrap-confirmation.js") }}
+
         {!!Html::script('node_modules/select2/dist/js/select2.min.js') !!}
+        {!!Html::script('node_modules/sweetalert2/dist/sweetalert2.min.js') !!}
+
+        {!!Html::script('node_modules/highcharts/js/highcharts.js') !!}
+
         @yield('after-scripts')
+
+
+
     </body>
 
 </html>

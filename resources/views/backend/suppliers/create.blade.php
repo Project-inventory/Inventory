@@ -1,6 +1,15 @@
 @extends('backend.layouts.app')
+
+@section('page-header')
+    <h1>Supplier<small>Add new supplier record</small></h1>
+    <ol class="breadcrumb">
+        <li><a href="{{ route('admin.dashboard') }}"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="{{ route('admin.suppliers.index') }}">Suppliers</a></li>
+        <li class="active">Add new supplier</li>
+    </ol>
+@endsection
+
 @section('content')
-    @include('backend.layout_inven.css.customStyle')
     <div class="row">
         <div class="col-md-12">
             <p class="text-center">{!! session('message') !!}</p>

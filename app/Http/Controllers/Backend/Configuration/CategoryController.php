@@ -9,6 +9,10 @@ use Yajra\Datatables\Facades\Datatables;
 
 class CategoryController extends Controller
 {
+    private $categories;
+    public function __construct(Category $categories) {
+        $this->categories = $categories;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -16,7 +20,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        return view('backend.configurations.categories.index');
+        $categories = $this->categories->all();
+        return view('backend.configurations.categories.index', compact('categories'));
     }
 
     /**
@@ -97,7 +102,8 @@ class CategoryController extends Controller
         $categories = Category::select(['cat_id','cat_name']);
         return Datatables::of($categories)
             ->addColumn('action', function ($category) {
-                return '<a href="'.route("admin.categories.delete", $category->cat_id).'" class="btn btn-xs btn-danger"><i class="glyphicon glyphicon-trash"></i></a>';
+                return ' <button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#edit'.$category->cat_id.'"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></button>
+                         <a href="'.route("admin.categories.delete", $category->cat_id).'" class="btn btn-xs btn-danger"><i class="glyphicon glyphicon-trash"></i></a>';
             })
             ->escapeColumns(['action'])
             ->make();

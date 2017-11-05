@@ -13,7 +13,7 @@ class CustomerController extends Controller
 
     public function __construct( Customer $customers){
         $this->customers = $customers;
-        $this->date = date('Y-m-d H:i:s');
+        $this->date = date('Y-m-d');
     }
 
     /**
@@ -46,12 +46,13 @@ class CustomerController extends Controller
     public function store(Request $request)
     {
         $this->customers->cust_name     = $request->cust_name;
-        $this->customers->cust_gender   = $request->sex;
+        $this->customers->cust_gender   = $request->cust_gender;
         $this->customers->cust_tel      = $request->cust_tel;
         $this->customers->cust_address  = $request->cust_address;
         $this->customers->city          = $request->city;
         $this->customers->company       = $request->company;
         $this->customers->registerDate  = $this->date;
+        $this->customers->status        = $request->status;
         $this->customers->save();
         $request->session()->flash('message', ' <div class="alert alert-success">
                                                     <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
@@ -110,14 +111,15 @@ class CustomerController extends Controller
                 'cust_address'  => $request->cust_address,
                 'city'          => $request->city,
                 'company'       => $request->company,
-                'registerDate'  => $this->date
+                'registerDate'  => $this->date,
+                'status'        => $request->status
             ]);
             $request->session()->flash('message', ' <div class="alert alert-success">
                                                     <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                                                     <strong>Update Customer Successful!</strong>
                                                 </div>');
 
-            return back();
+            return redirect('admin/customers');
         }
         return redirect('admin/customers');
     }

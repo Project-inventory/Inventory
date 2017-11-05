@@ -8,7 +8,7 @@ use App\Member;
 class Customer extends Model
 {
     protected $table = 'customers';
-    protected $fillable = [ 'cust_name','cust_gender','cust_tel','cust_address','city','company','registerDate'];
+    protected $fillable = [ 'cust_name','cust_gender','cust_tel','cust_address','city','company','registerDate', 'status'];
     protected $primaryKey = 'cust_id';
     public $timestamps = false;
 

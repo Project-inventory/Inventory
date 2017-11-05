@@ -12,9 +12,9 @@
 @endsection
 
 @section('page-header')
-    <h1>Customers<small>List all customers record</small></h1>
+    <h1>Customers<small>List all of the customer's record</small></h1>
     <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="{{ route('admin.dashboard') }}"><i class="fa fa-dashboard"></i> Home</a></li>
         <li class="active">Customers</li>
     </ol>
 @endsection

@@ -58,10 +58,10 @@ class ProductController extends Controller
         }else {
             $filename = "N/A";
         }
+
         $this->products->pro_name           = $request->pro_name;
         $this->products->pro_unit           = $request->pro_unit;
         $this->products->pro_quantity       = $request->pro_quantity;
-        $this->products->pro_in_stock       = $request->pro_quantity;
         $this->products->pro_date_storage   = $this->date;
         $this->products->pro_price          = $request->pro_price;
         $this->products->pro_barcode        = $request->pro_barcode;
@@ -72,6 +72,7 @@ class ProductController extends Controller
         $this->products->cat_id             = $request->cat_id;
         $this->products->brand_id           = $request->brand_id;
         $this->products->save();
+
         $request->session()->flash('message', ' <div class="alert alert-success">
                                                     <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                                                     <strong>Create Product Success!</strong>
@@ -116,6 +117,17 @@ class ProductController extends Controller
         $id = preg_replace( '#[^0-9]#', '', $request->pro_id);
 
         if (!empty($id)) {
+
+            if ($request->hasFile('pro_photo')) {
+                $pro_photo = $request->file('pro_photo');
+                $photoName = $pro_photo->getClientOriginalName();
+                $filename = time().$photoName;
+                $path = public_path('product_img/'.$filename);
+                Image::make($pro_photo->getRealPath())->resize(200, 200)->save($path);
+            }else {
+                $filename = "N/A";
+            }
+
             $this->products->where('pro_id', $id)->update([
                 'pro_name'           => $request->pro_name,
                 'pro_unit'           => $request->pro_unit,
@@ -124,7 +136,7 @@ class ProductController extends Controller
                 'pro_barcode'        => $request->pro_barcode,
                 'pro_expiry'         => $request->pro_expiry,
                 'pro_tax'            => $request->pro_tax,
-                'pro_photo'          => $request->pro_photo,
+                'pro_photo'          => $filename,
                 'gp_id'              => $request->gp_id,
                 'cat_id'             => $request->cat_id,
                 'brand_id'           => $request->brand_id
@@ -134,7 +146,7 @@ class ProductController extends Controller
                                                     <strong>Update Product Successful!</strong>
                                                 </div>');
 
-            return back();
+            return redirect('admin/products');
         }
         return redirect('admin/products');
     }

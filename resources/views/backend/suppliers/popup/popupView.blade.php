@@ -18,11 +18,11 @@
                     </div>
                     <div class="box-right col-md-9">
                         <p>{{ $supplier->ven_name }}</p>
-                        <p>{{$supplier->ven_company}}</p>
+                        <p>{{ is_null($supplier->ven_company)? 'N/A':$supplier->ven_company }}</p>
                         <p>{{$supplier->ven_tel}}</p>
-                        <p>{{$supplier->ven_website}}</p>
+                        <p>{{ is_null($supplier->ven_website)? 'N/A':$supplier->ven_website }}</p>
                         <p>{{$supplier->insert_date}}</p>
-                        <address>{{$supplier->ven_address}}</address>
+                        <address>{{ is_null($supplier->ven_address)? 'N/A':$supplier->ven_address }}</address>
                     </div>
                 </div>
                 <div class="row">
@@ -30,7 +30,7 @@
                         <p>Status :</p>
                     </div>
                     <div class="col-md-9">
-                        <p>{{$supplier->ven_status}}</p>
+                        <p>{{ is_null($supplier->ven_status)? 'N/A':$supplier->ven_status }}</p>
                     </div>
                 </div>
                 <div class="row">
@@ -38,7 +38,7 @@
                         <p>Description :</p>
                     </div>
                     <div class="col-md-9">
-                        <p>{{$supplier->ven_description}}</p>
+                        <p>{{ is_null($supplier->ven_description)? 'N/a':$supplier->ven_description }}</p>
                     </div>
                 </div>
             </div>

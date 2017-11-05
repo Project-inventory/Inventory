@@ -20,13 +20,13 @@
                     </div>
                     <div class="box-right col-md-4">
                         <p>{{ $product->pro_name }}</p>
-                        <p>{{ $product->pro_unit }}</p>
+                        <p>{{ is_null($product->pro_unit)? 'N/A':$product->pro_unit }}</p>
                         <p>{{ $product->pro_quantity }}</p>
                         <p>{{ $product->pro_date_storage }}</p>
                         <p>$ {{ number_format($product->pro_price ,2)}}</p>
                         <p>{{ $product->pro_barcode }}</p>
-                        <p>{{is_null($product->pro_expiry)?'N/A':$product->pro_expiry}}</p>
-                        <p>{{ $product->pro_tax }}%</p><br>
+                        <p>{{ is_null($product->pro_expiry)?'N/A':$product->pro_expiry }}</p>
+                        <p>{{ is_null($product->pro_tax)? 'N/A':$product->pro_tax }}%</p><br>
                     </div>
                     <div class="col-md-5">
                         <img src="{{url('/product_img/'.$product->pro_photo)}}" alt="Image"/>

@@ -52,7 +52,9 @@
             </div>
         </div>
     </div>
-
+    @foreach($categories as $key => $category)
+        @include('backend.configurations.categories.edit')
+    @endforeach
     @include('backend.configurations.popup.popupCategory')
 
 @endsection

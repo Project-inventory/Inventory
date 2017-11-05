@@ -9,7 +9,7 @@ use Yajra\Datatables\Facades\Datatables;
 
 class SupplierController extends Controller
 {
-    private $suppliers, $date;
+    private $suppliers;
     public function __construct(Supplier $suppliers) {
         $this->suppliers = $suppliers;
         $this->date = date('Y-m-d H:i:s');

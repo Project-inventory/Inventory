@@ -12,10 +12,10 @@
 @endsection
 
 @section('page-header')
-    <h1>Products<small>List all products record</small></h1>
+    <h1>Products<small>List all of the product's record</small></h1>
     <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active">products</li>
+        <li><a href="{{ route('admin.dashboard') }}"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active">Products</li>
     </ol>
 @endsection
 
@@ -24,7 +24,7 @@
         <div class="box-header with-border">
             <h3 class="box-title">Table Products</h3>
             <div class="box-tools pull-right">
-                <a href="{{ route('admin.products.create') }}" class="btn btn-primary btn-sm">Add New Customer</a>
+                <a href="{{ route('admin.products.create') }}" class="btn btn-primary btn-sm">Add New Product</a>
             </div><!-- /.box tools -->
         </div><!-- /.box-header -->
         <div class="box-body">

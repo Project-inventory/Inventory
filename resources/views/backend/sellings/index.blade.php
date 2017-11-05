@@ -14,7 +14,7 @@
 @section('page-header')
     <h1>Product Orders<small>customer can order product here</small></h1>
     <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="{{ route('admin.dashboard') }}"><i class="fa fa-dashboard"></i> Home</a></li>
         <li class="active">Order products</li>
     </ol>
 @endsection
@@ -51,8 +51,8 @@
                 <div class="box-header with-border">
                     <h3 class="box-title">Order List</h3>
                     <div class="box-tool pull-right">
-                        <form action="{{ route('admin.sellings.clear') }}" method="GET" class="clear_cart_items">
-                            <button type="submit" onclick="return confirm('Are you sure?')" class="btn btn-danger btn-sm" data-toggle="confirmation">Clear</button>
+                        <form action="{{ route('admin.sellings.clear') }}" method="GET" class="clear_cart_items" onsubmit="return confirmDelete()">
+                            <button type="submit" class="btn btn-danger btn-sm" data-toggle="confirmation">Clear</button>
                         </form>
                     </div>
                 </div><!-- /.box-header -->
@@ -77,12 +77,12 @@
                                         {{ csrf_field() }}
                                         {{ method_field('POST') }}
                                         <input type="hidden" name="id" value="{{  $cartItem->rowId }}"/>
-                                        <button type="button" class="btn btn-info btn-sm btn_sub">-</button>
+                                        <button type="button" class="btn btn-info btn-sm btn_sub pull-left">-</button>
                                         <div class="form-group" style="width: 50%">
-                                            <input type="text" class="form-control " name="pro_qty" id="pro_qty" value="{{  $cartItem->qty }}" min="1" max="100" style="width: 97%; padding: 6px; margin: 0 3%">
+                                            <input type="text" class="form-control" name="pro_qty" id="pro_qty" value="{{  $cartItem->qty }}" min="1" max="100" style="width: 97%; padding: 6px; margin: 0 12%; height: 30px">
                                         </div>
-                                        <button type="button" class="btn btn-info btn-sm btn_plus">+</button>
-                                        <button type="submit" class="btn btn-info btn-sm" i>add</button>
+                                        <button type="button" class="btn btn-info btn-sm btn_plus pull-right">+</button>
+                                        <button type="submit" class="btn btn-info btn-sm btn-block" style="margin-top: 3%">add</button>
                                     </form>
                                 </td>
                                 <td>${{ number_format($cartItem->price, 2) }}</td>
@@ -118,6 +118,17 @@
 @section('after-scripts')
 
     <script type="text/javascript">
+
+        function confirmDelete() {
+            var result = confirm('Are you sure you want to delete?');
+
+            if (result) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
         $(function () {
             $(document).on('click', '.btn_plus', function (e) {
                 e.preventDefault();
@@ -155,8 +166,6 @@
                 ],
             });
         });
+
     </script>
-
-
-
 @endsection

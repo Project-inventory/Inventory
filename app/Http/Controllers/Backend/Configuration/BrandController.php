@@ -9,6 +9,10 @@ use Yajra\Datatables\Facades\Datatables;
 
 class BrandController extends Controller
 {
+    private $brands;
+    public function __construct(Brand $brands) {
+        $this->brands = $brands;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -16,7 +20,8 @@ class BrandController extends Controller
      */
     public function index()
     {
-        return view('backend.configurations.brands.index');
+        $brands = $this->brands->all();
+        return view('backend.configurations.brands.index', compact('brands'));
     }
 
     /**
@@ -93,8 +98,8 @@ class BrandController extends Controller
         $brands = Brand::select(['brands_id','brand_name']);
         return Datatables::of($brands)
             ->addColumn('action', function ($brand) {
-                return '<a href="'.route("admin.brands.delete", $brand->brands_id).'" class="btn btn-xs btn-danger"><i class="glyphicon glyphicon-trash"></i></a>';
-//                return '<a href="'.$brand->brand_name.'/delete/'.$brand->brands_id.'" class="btn btn-xs btn-danger"><i class="glyphicon glyphicon-trash"></i></a>';
+                return ' <button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#edit'.$brand->brands_id.'"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></button>
+                         <a href="'.route("admin.brands.delete", $brand->brands_id).'" class="btn btn-xs btn-danger"><i class="glyphicon glyphicon-trash"></i></a>';
             })
             ->escapeColumns(['action'])
             ->make();

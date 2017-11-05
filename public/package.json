@@ -9,7 +9,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "highcharts": "^6.0.2",
     "select2": "^4.0.4",
-    "sweetalert": "^2.0.8"
+    "sweetalert": "^2.0.8",
+    "sweetalert2": "^6.11.4"
   }
 }

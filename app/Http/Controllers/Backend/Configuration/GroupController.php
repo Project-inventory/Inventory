@@ -9,6 +9,11 @@ use Yajra\Datatables\Facades\Datatables;
 
 class GroupController extends Controller
 {
+    private $groups;
+    public function __construct(Group $groups) {
+        $this->groups = $groups;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -16,7 +21,8 @@ class GroupController extends Controller
      */
     public function index()
     {
-        return view('backend.configurations.groups.index');
+        $groups = $this->groups->all();
+        return view('backend.configurations.groups.index', compact('groups'));
     }
 
     /**
@@ -95,7 +101,8 @@ class GroupController extends Controller
         $groups = Group::select(['gp_id','gp_name']);
         return Datatables::of($groups)
             ->addColumn('action', function ($group) {
-                return '<a href="'.route("admin.groups.delete", $group->gp_id).'" class="btn btn-xs btn-danger"><i class="glyphicon glyphicon-trash"></i></a>';
+                return ' <button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#edit'.$group->gp_id.'"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></button>
+                         <a href="'.route("admin.groups.delete", $group->gp_id).'" class="btn btn-xs btn-danger"><i class="glyphicon glyphicon-trash"></i></a>';
             })
             ->escapeColumns(['action'])
             ->make();

@@ -3,9 +3,9 @@
 @section('page-header')
     <h1>Products<small>Edit the products record</small></h1>
     <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active">products</li>
-        <li class="active">edit</li>
+        <li><a href="{{ route('admin.dashboard') }}"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="{{ route('admin.products.index')}}">Products</a></li>
+        <li class="active">Edit</li>
     </ol>
 @endsection
 
@@ -37,7 +37,7 @@
                                         <tbody>
                                         <tr>
                                             <td class="photo" style="height: 220px">
-                                                <img id="blah" src="#"/>
+                                                <img id="blah" src="{{url('/product_img/'.$product->pro_photo)}}"/>
                                             </td>
                                         </tr>
                                         <tr>
@@ -48,7 +48,11 @@
                                                     </label>
                                                     <label class="pull-right">
                                                         <i class="fa fa-picture-o fa-3x" aria-hidden="true">
-                                                            <input type='file' onchange="readURL(this);" style="display: none"/>
+                                                            <input type='file'
+                                                                   name="pro_photo"
+                                                                   onchange="readURL(this);"
+                                                                   style="display: none"
+                                                                   accept="image/*"/>
                                                         </i>
                                                     </label>
 
@@ -73,7 +77,7 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="productUnit">Product Unit</label>
-                                        <input type="text" name="pro_unit" id="pro_unit" class="form-control" value="{{$product->pro_unit}}">
+                                        <input type="text" name="pro_unit" id="pro_unit" class="form-control" value="{{ is_null($product->pro_unit)?'N/A':$product->pro_unit }}">
                                     </div>
                                 </div>
                                 {{------------------------------------------------------------------------------------}}
@@ -101,23 +105,23 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="expiryDate">Expiry</label>
-                                        <input type="date" name="pro_expiry" id="pro_expiry" class="form-control" value="{{$product->pro_expiry}}">
+                                        <input type="date" name="pro_expiry" id="pro_expiry" class="form-control" value="{{ is_null($product->pro_expiry)?'N/A':$product->pro_expiry }}">
                                     </div>
                                 </div>
                                 {{------------------------------------------------------------------------------------}}
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="tax">Tax</label>
-                                        <input type="text" name="pro_tax" id="pro_tax" class="form-control" value="{{$product->pro_tax}}">
+                                        <input type="text" name="pro_tax" id="pro_tax" class="form-control" value="{{ is_null($product->pro_tax)?'N/A':$product->pro_tax }}">
                                     </div>
                                 </div>
 
                                 <div class="col-sm-4">
                                     <label for="group">Group</label>
                                     <select name="gp_id" id="gp_id" class="form-control">
-                                        <option value=""></option>
+                                        <option value="{{$product->group->gp_id}}">{{$product->group->gp_name}}</option>
                                         @foreach($groups as $group=>$value)
-                                            <option value="{{ $value->gp_id}}">{{ $value->gp_name }}</option>
+                                            <option value="{{is_null($product->group)?'0': $product->group->gp_id}}">{{is_null($product->group)?'N/A': $product->group->gp_name}}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -125,7 +129,7 @@
                                 <div class="col-sm-4">
                                     <label for="cattegory">Category</label>
                                     <select name="cat_id" id="cat_id" class="form-control">
-                                        <option value=""></option>
+                                        <option value="{{is_null($product->category)?'0': $product->category->cat_id}}">{{is_null($product->category)?'N/A': $product->category->cat_name}}</option>
                                         @foreach($categories as $category=>$value)
                                             <option value="{{ $value->cat_id}}">{{ $value->cat_name }}</option>
                                         @endforeach
@@ -135,7 +139,7 @@
                                 <div class="col-sm-4">
                                     <label for="brand">Brand</label>
                                     <select name="brand_id" id="brand_id" class="form-control">
-                                        <option value=""></option>
+                                        <option value="{{is_null($product->brand)?'0': $product->brand->brands_id}}">{{is_null($product->brand)?'N/A': $product->brand->brand_name}}</option>
                                         @foreach($brands as $brand=>$value)
                                             <option value="{{ $value->brands_id}}">{{ $value->brand_name }}</option>
                                         @endforeach
@@ -154,23 +158,6 @@
             </div>
         </div>
     </div>
-    <script type="text/javascript">
-
-        function readURL(input) {
-            if (input.files && input.files[0]) {
-                var reader = new FileReader();
-
-                reader.onload = function (e) {
-                    $('#blah')
-                            .attr('src', e.target.result)
-                            .width(228)
-                            .height(203);
-                };
-
-                reader.readAsDataURL(input.files[0]);
-            }
-        }
-    </script>
 @endsection
 
 @section('after-scripts')
@@ -189,5 +176,20 @@
             placeholder: 'select a name',
             allowClear: true
         });
+
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#blah')
+                            .attr('src', e.target.result)
+                            .width(228)
+                            .height(203);
+                };
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
     </script>
 @endsection

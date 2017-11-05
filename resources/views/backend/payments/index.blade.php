@@ -1,5 +1,14 @@
 @extends('backend.layouts.app')
 
+@section('page-header')
+    <h1>Payment<small>The payment of prices</small></h1>
+    <ol class="breadcrumb">
+        <li><a href="{{ route('admin.dashboard') }}"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="{{ route('admin.sellings.index') }}">Order products</a></li>
+        <li class="active">Payment</li>
+    </ol>
+@endsection
+
 @section('content')
     <div class="box box-success col-md-12">
         <form action="{{ route('admin.payments.store') }}" method="POST">
@@ -98,7 +107,7 @@
                     </div>
                     <div class="pull-right">
                         <button class="btn btn-success" type="submit">Submit</button>
-                        <a href="{{ route("admin.payments.edit") }}" class="btn btn-danger">Back</a>
+                        <a href="{{ route('admin.sellings.index') }}" class="btn btn-danger">Back</a>
                     </div>
                 {{--================================================================================================--}}
                 </div>
