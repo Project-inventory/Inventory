@@ -1,5 +1,9 @@
 @extends('backend.layouts.app')
 
+@section('title')
+    Products
+@endsection
+
 @section('after-styles')
     <style type="text/css">
         #products-table_filter {
@@ -57,6 +61,31 @@
                 processing: true,
                 serverSide: true,
                 ajax: 'http://siyen.dev:8080/Inventory/public/admin/products/get-products',
+                dom: 'Bfrtip',
+                buttons: [
+                    {
+                        extend:    'copy',
+                        text:      '<i class="fa fa-files-o"></i> Copy',
+                        titleAttr: 'Copy'
+                    },
+                    {
+                        extend: 'excel',
+                        text:      '<i class="fa fa-file-excel-o"></i> Excel',
+                        titleAttr: 'Excel',
+                        title: 'List of Products'
+                    },
+                    {
+                        extend: 'pdf',
+                        text:      '<i class="fa fa-file-pdf-o"></i> PDF',
+                        titleAttr: 'PDF',
+                        title: 'List of Products'
+                    },
+                    {
+                        extend:    'print',
+                        text:      '<i class="fa fa-print" aria-hidden="true"></i> Print',
+                        titleAttr: 'Print'
+                    }
+                ],
                 columns: [
                     {data: 0, name: 'pro_id'},
                     {data: 1, name: 'pro_name'},

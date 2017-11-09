@@ -1,5 +1,9 @@
 @extends('backend.layouts.app')
 
+@section('title')
+    Customers/Edit
+@endsection
+
 @section('page-header')
     <h1>Customers<small>Edit customers record</small></h1>
     <ol class="breadcrumb">
@@ -97,8 +101,8 @@
                         </div>
                         {{--------------------------------------------------------------------------------------------}}
                         <div class="box-footer pull-right" style="margin-top: 3%">
-                            <button type="submit" class="btn btn-primary btn-save mybtn">Update</button>
-                            <a href="{{ route('admin.customers.index') }}" class="btn btn-danger btn-back mybtn">Back</a>
+                            <button type="submit" class="btn btn-primary btn-save mybtn"><i class="fa fa-upload" aria-hidden="true"></i> Update</button>
+                            <a href="{{ route('admin.customers.index') }}" class="btn btn-danger btn-back mybtn"><i class="fa fa-reply" aria-hidden="true"></i> Back</a>
                         </div>
                     </form>
                 </div>

@@ -13,7 +13,7 @@ class Customer extends Model
     public $timestamps = false;
 
     public function order() {
-        return $this->belongsToMany(Order::class);
+        return $this->hasMany('App/Order', 'cust_id');
     }
 
     public function member() {

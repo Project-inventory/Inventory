@@ -1,5 +1,9 @@
 @extends('backend.layouts.app')
 
+@section('title')
+    Suppliers/Create
+@endsection
+
 @section('page-header')
     <h1>Supplier<small>Add new supplier record</small></h1>
     <ol class="breadcrumb">
@@ -81,9 +85,9 @@
                         </div>
                         {{--------------------------------------------------------------------------------------------}}
                         <div class="box-footer pull-right" style="margin-top: 3%">
-                            <button type="submit" class="btn btn-primary btn-save mybtn">Save</button>
-                            <button type="button" class="btn btn-warning btn-reset mybtn" onclick="this.form.reset()">Reset</button>
-                            <a href="{{ route('admin.suppliers.index') }}" class="btn btn-danger btn-back mybtn">Back</a>
+                            <button type="submit" class="btn btn-primary btn-save mybtn"><i class="fa fa-floppy-o" aria-hidden="true"></i> Save</button>
+                            <button type="button" class="btn btn-warning btn-reset mybtn" onclick="this.form.reset()"><i class="fa fa-retweet" aria-hidden="true"></i> Reset</button>
+                            <a href="{{ route('admin.suppliers.index') }}" class="btn btn-danger btn-back mybtn"><i class="fa fa-reply" aria-hidden="true"></i> Back</a>
                         </div>
                     </form>
                 </div>

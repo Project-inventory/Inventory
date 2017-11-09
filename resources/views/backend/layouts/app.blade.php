@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>@yield('title', app_name())</title>
+        <title>@yield('title')</title>
 
         <!-- Meta -->
         <meta name="description" content="@yield('meta_description', 'Default Description')">
@@ -29,19 +29,22 @@
         @else
             {{ Html::style(mix('css/backend.css')) }}
         @endif
-            {!!Html::style('css/datatable.css') !!}
+            {{--{!!Html::style('css/datatable.css') !!}--}}
             {!!Html::style('node_modules/select2/dist/css/select2.min.css') !!}
             {!!Html::style('node_modules/sweetalert2/dist/sweetalert2.min.css') !!}
 
         @yield('after-styles')
         {!!Html::style('node_modules/highcharts/css/highcharts.css') !!}
+        {!!Html::style('css/backend/plugin/datatables/datatables.bootstrap.min.css') !!}
+        {!!Html::style('css/backend/plugin/datatables/button.datatable.min.css') !!}
+        {!!Html::style('css/datatable.row-group.css') !!}
 
 
         <!-- Html5 Shim and Respond.js IE8 support of Html5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
         <!--[if lt IE 9]>
-        {{ Html::script('https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js') }}
-        {{ Html::script('https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js') }}
+        {!! Html::script('https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js') !!}
+        {!! Html::script('https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js') !!}
         <![endif]-->
 
         <!-- Scripts -->
@@ -87,19 +90,23 @@
         @yield('before-scripts')
         <!-- DataTables -->
         {{ Html::script(mix('js/backend.js')) }}
-        {{ Html::script("js/datatable.js") }}
-        {{ Html::script("js/datatable.bootstrap.js") }}
-        {{ Html::script("js/bootstrap-confirmation.js") }}
+        {!!  Html::script("js/datatable.js")  !!}
+        {!! Html::script("js/button.html5.min.js") !!}
+        {!! Html::script("js/button.print.min.js") !!}
+        {!! Html::script("js/datatable.bootstrap.js") !!}
+        {!! Html::script("js/datatable.button.min.js") !!}
+        {!! Html::script("js/datatable.button.flash.min.js") !!}
+        {!! Html::script("js/jsZip.min.js") !!}
+        {!! Html::script("js/pdfmake.min.js") !!}
+        {!! Html::script("js/vfs_fonts.min.js") !!}
+        {!! Html::script("js/datatable.row_group.min.js") !!}
 
         {!!Html::script('node_modules/select2/dist/js/select2.min.js') !!}
         {!!Html::script('node_modules/sweetalert2/dist/sweetalert2.min.js') !!}
 
         {!!Html::script('node_modules/highcharts/js/highcharts.js') !!}
-
+        {!!Html::script('node_modules/highcharts/highcharts-more.js') !!}
         @yield('after-scripts')
-
-
-
     </body>
 
 </html>

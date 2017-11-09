@@ -10,7 +10,8 @@
                 <div class="row">
                     <div class="box-left col-md-3">
                         <p>Product id :</p>
-                        <p>Customer id :</p>
+                        <p>Product name :</p>
+                        <p>Customer name :</p>
                         <p>Sale Quantity :</p>
                         <p>Tax :</p>
                         <p>Subtotal :</p>
@@ -23,7 +24,8 @@
                     </div>
                     <div class="box-right col-md-9">
                         <p>{{ $order->pro_id }}</p>
-                        <p>{{ is_null($order->cust_id)? 'N/A':$order->cust_id }}</p>
+                        <p>{{ $order->pro_name }}</p>
+                        <p>{{ is_null($order->cust_name)? 'N/A':$order->cust_name }}</p>
                         <p>{{ $order->order_quantity}}</p>
                         <p>$ {{ number_format($order->order_tax, 2) }}</p>
                         <p>$ {{ number_format($order->order_subtotal, 2) }}</p>

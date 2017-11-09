@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Backend\sales;
 
+use App\Customer;
 use App\Order;
 use App\Product;
 use Illuminate\Http\Request;
@@ -94,13 +95,12 @@ class SalesController extends Controller
     public function getSales ()
     {
         $orders = $this->orders
-            ->select(['order_id', 'pro_id', 'cust_id', 'order_quantity', 'order_date']);
+            ->select(['order_id', 'pro_id', 'pro_name', 'cust_name', 'order_quantity', 'order_date']);
         return Datatables::of($orders)
             ->addColumn('action', function ($order) {
                 return '<button class="btn btn-info btn-xs" data-toggle="modal" data-target="#view'.$order->order_id.'"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></button>';
             })
             ->escapeColumns(['action'])
-            ->editColumn('cust_id', '{{ is_null($cust_id)?"N/A":$cust_id }}')
             ->make();
     }
 }

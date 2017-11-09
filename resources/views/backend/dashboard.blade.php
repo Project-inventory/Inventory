@@ -1,5 +1,9 @@
 @extends('backend.layouts.app')
 
+@section('title')
+    Dashboard
+@endsection
+
 @section('page-header')
         <h1>Dashboard<small>Control panel</small></h1>
         <ol class="breadcrumb">
@@ -83,9 +87,46 @@
     </div>
     {{--============================================================================================================--}}
     <div class="row">
+        <div class="col-md-8">
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <i class="fa fa-align-left" aria-hidden="true"></i>
+                    <h3 class="box-title">Progress bars</h3>
+
+                    <div class="box-tools pull-right">
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="box-body">
+                    <div class="progress-group">
+                        <span class="progress-text">Products has Low Quantity in Stock</span>
+                        <span class="progress-number"><b>{{$count_lowProduct}}</b>/{{$count_product}}</span>
+
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-warning progress-bar-striped" style="width: {{$lowProducts}}%"></div>
+                        </div>
+                    </div>
+                    <!-- /.progress-group -->
+                    <div class="progress-group">
+                        <span class="progress-text">Members</span>
+                        <span class="progress-number"><b>{{$count_member}}</b>/{{$count_customer}}</span>
+
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-success progress-bar-striped" style="width: {{$members}}%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{--============================================================================================================--}}
+    <div class="row">
         <div class="col-md-12">
             <div class="box box-primary">
                 <div class="box-header with-border">
+                    <i class="fa fa-bar-chart" aria-hidden="true"></i>
                     <h3 class="box-title">Area Chart</h3>
 
                     <div class="box-tools pull-right">

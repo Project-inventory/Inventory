@@ -1,5 +1,9 @@
 @extends('backend.layouts.app')
 
+@section('title')
+    Sales
+@endsection
+
 @section('after-styles')
     <style type="text/css">
         #sales-table_filter {
@@ -28,9 +32,10 @@
             <table class="table table-striped" id="sales-table">
                 <thead>
                 <tr>
-                    <th>#</th>
+                    <th>ID</th>
                     <th>Product id</th>
-                    <th>Customer id</th>
+                    <th>Product name</th>
+                    <th>Customer name</th>
                     <th>Quantity</th>
                     <th>Date</th>
                     <th>Action</th>
@@ -56,13 +61,46 @@
                     processing: true,
                     serverSide: true,
                     ajax: 'http://siyen.dev:8080/Inventory/public/admin/sales/get-sales',
+                    dom: 'Bfrtip',
+                    buttons: [
+                        {
+                            extend:    'copy',
+                            text:      '<i class="fa fa-files-o"></i> Copy',
+                            titleAttr: 'Copy'
+                        },
+                        {
+                            extend: 'excel',
+                            text:      '<i class="fa fa-file-excel-o"></i> Excel',
+                            titleAttr: 'Excel',
+                            title: 'List of Sales'
+                        },
+                        {
+                            extend: 'pdf',
+                            text:      '<i class="fa fa-file-pdf-o"></i> PDF',
+                            titleAttr: 'PDF',
+                            title: 'List of Sales'
+                        },
+                        {
+                            extend:    'print',
+                            text:      '<i class="fa fa-print" aria-hidden="true"></i> Print',
+                            titleAttr: 'Print'
+                        }
+                    ],
+                    orderFixed: [5, 'asc'],
+                    rowGroup: {
+                        startRender: function ( rows, group ) {
+                            return 'Date: ' + group +' ( Items: '+rows.count()+' )';
+                        },
+                        dataSrc: 5
+                    },
                     columns: [
                         {data: 0, name: 'order_id'},
                         {data: 1, name: 'pro_id'},
-                        {data: 2, name: 'cust_id'},
-                        {data: 3, name: 'order_quantity'},
-                        {data: 4, name: 'order_date'},
-                        {data: 5, name: 'action'}
+                        {data: 2, name: 'pro_name'},
+                        {data: 3, name: 'cust_name'},
+                        {data: 4, name: 'order_quantity'},
+                        {data: 5, name: 'order_date'},
+                        {data: 6, name: 'action'}
                     ]
                 });
             });

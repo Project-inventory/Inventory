@@ -1,5 +1,9 @@
 @extends('backend.layouts.app')
 
+@section('title')
+    Payment
+@endsection
+
 @section('page-header')
     <h1>Payment<small>The payment of prices</small></h1>
     <ol class="breadcrumb">
@@ -19,48 +23,70 @@
                     <select name="select_customer" id="select_customer">
                         <option value=""></option>
                         @foreach($customers as $key => $customer)
-                        <option value="{{ $customer->cust_id }}">{{$customer->cust_name}}</option>
+                        <option value="{{ $customer->cust_name }}">{{$customer->cust_name}}</option>
                         @endforeach
                     </select>
                 </div><!-- /.box tools -->
             </div><!-- /.box-header -->
             <div class="box-body">
-                <div class="row">
-                    <div class="box-payment col-md-11" style="margin: 0 4%">
-                        <div>
-                            <input type="hidden" value="{{ access()->user()->first_name }}" name="user_name">
-                        </div>
-                        <div>
-                            <table  class="table table-striped table-responsive">
-                                <thead>
-                                <tr>
-                                    <th>Name</th>
-                                    <th>Quantity</th>
-                                    <th>Price ($)</th>
-                                    <th style="width: 250px">Total ($)</th>
+                <div class="box-payment col-md-12">
+                    <div>
+                        <input type="hidden" value="{{ access()->user()->first_name }}" name="user_name">
+                    </div>
+                    <div>
+                        <table  class="table table-striped table-responsive">
+                            <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Quantity</th>
+                                <th>Price ($)</th>
+                                <th style="width: 250px">Total ($)</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach($cartItems as $key=>$cartItem)
+                                <tr >
+                                    <td>
+                                        <p data-value="{{$cartItem->id}}">{{ $cartItem->name }}</p>
+                                        <input type="hidden" name="item_id" value="{{$cartItem->id}}">
+                                    </td>
+                                    <td id="qty">{{ $cartItem->qty}}</td>
+                                    <td id="price">${{ number_format($cartItem->price, 2) }}</td>
+                                    <td id="total">${{number_format($cartItem->price * $cartItem->qty, 2)}}</td>
                                 </tr>
-                                </thead>
+                            @endforeach
+                            {{--@foreach($updateQtys as $key => $updateQty)--}}
+                                {{--<input type="hidden" value="{{$updateQty->pro_quantity }}" name="total_qty">--}}
+                            {{--@endforeach--}}
+                            <tr>
+                                <td>Item:</td>
+                                <td>{{Cart::count()}} Items</td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-xs-6 col-md-6">
+                        <p class="lead">Payment Methods:</p>
+                        <img src="{{url('/img/visa.png')}}" alt="Visa">
+                        <img src="{{url('/img/mastercard.png')}}" alt="Mastercard">
+                        <img src="{{url('/img/paypal2.png')}}" alt="Paypal">
+
+                        <p class="text-muted well well-sm no-shadow" style="margin-top: 10px;">
+                            Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                            Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
+                            when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+                            It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
+                            It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages,
+                            and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+                        </p>
+                    </div>
+                    <div class="col-xs-6 col-md-6">
+                        <p class="lead">Amount Due {{date('Y-m-d H:i:s')}}</p>
+                        <div class="table-responsive">
+                            <table class="table">
                                 <tbody>
-                                @foreach($cartItems as $key=>$cartItem)
-                                    <tr >
-                                        <td>
-                                            <p data-value="{{$cartItem->id}}">{{ $cartItem->name }}</p>
-                                            <input type="hidden" name="item_id" value="{{$cartItem->id}}">
-                                        </td>
-                                        <td id="qty">{{ $cartItem->qty}}</td>
-                                        <td id="price">${{ number_format($cartItem->price, 2) }}</td>
-                                        <td id="total">${{number_format($cartItem->price * $cartItem->qty, 2)}}</td>
-                                    </tr>
-                                @endforeach
-                                {{--@foreach($updateQtys as $key => $updateQty)--}}
-                                    {{--<input type="hidden" value="{{$updateQty->pro_quantity }}" name="total_qty">--}}
-                                {{--@endforeach--}}
-                                <tr>
-                                    <td>Item:</td>
-                                    <td>{{Cart::count()}} Items</td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
                                 <tr>
                                     <td colspan="3">Sub Total:</td>
                                     <td>$ {{number_format(Cart::subtotal(),2)}}</td>
@@ -106,10 +132,15 @@
                         </div>
                     </div>
                     <div class="pull-right">
-                        <button class="btn btn-success" type="submit">Submit</button>
-                        <a href="{{ route('admin.sellings.index') }}" class="btn btn-danger">Back</a>
+                        <button class="btn btn-success" type="submit"><i class="fa fa-credit-card" aria-hidden="true"></i> Submit Payment</button>
+                        <a href="{{ route('admin.sellings.index') }}" class="btn btn-danger"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</a>
                     </div>
-                {{--================================================================================================--}}
+                </div>
+            {{--================================================================================================--}}
+                <div class="row">
+                    <div class="col-md-12">
+
+                    </div>
                 </div>
             </div><!-- /.box-body -->
         </form>

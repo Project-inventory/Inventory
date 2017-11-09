@@ -103,7 +103,7 @@ class CategoryController extends Controller
         return Datatables::of($categories)
             ->addColumn('action', function ($category) {
                 return ' <button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#edit'.$category->cat_id.'"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></button>
-                         <a href="'.route("admin.categories.delete", $category->cat_id).'" class="btn btn-xs btn-danger"><i class="glyphicon glyphicon-trash"></i></a>';
+                         <a href="'.route("admin.categories.delete", $category->cat_id).'" class="btn btn-xs btn-danger" onclick="return confirm(\'Are you sure you want to delete?\')"><i class="glyphicon glyphicon-trash"></i></a>';
             })
             ->escapeColumns(['action'])
             ->make();

@@ -8,31 +8,39 @@ use App\Product;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use PDF;
 
 class PaymentController extends Controller
 {
-    private $products, $date, $orders;
+    private $products, $date, $orders, $customers;
     public function __construct( Product $products, Order $orders, Customer $customers){
         $this->orders  = $orders;
         $this->customers = $customers;
         $this->products = $products;
-        $this->date = date('Y-m-d');
+        $this->date = date('Y-m-d H:i:s');
     }
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $cartItems = Cart::content();
-        foreach ($cartItems as $key=>$cartItem) {
-            $updateQtys = Product::where('pro_id', $cartItem->id)->get();
+        if (count($cartItems) == 0) {
+            $request->session()->flash('message', ' <div class="alert alert-danger">
+                                                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                                    <h4>Please!! Choose the product first before payment, Thank you!!</h4>
+                                                </div>');
+            return redirect('admin/sellings');
+            
+        }else {
+            foreach ($cartItems as $key => $cartItem) {
+                $updateQtys = $this->products->where('pro_id', $cartItem->id)->get();
+            }
+            $products = $this->products->all();
+            $customers = $this->customers->all();
+            return view('backend.payments.index', compact('products', 'cartItems', 'updateQtys', 'customers'));
         }
-        $products = $this->products->all();
-        $customers = $this->customers->all();
-        return view('backend.payments.index', compact('products', 'cartItems', 'updateQtys', 'customers'));
     }
 
     /**
@@ -56,7 +64,8 @@ class PaymentController extends Controller
         foreach ($cartItems as $key=>$cartItem) {
             $dataInsert[] = [
                 'pro_id'            => $cartItem->id,
-                'cust_id'           => $request->select_customer,
+                'pro_name'          => $cartItem->name,
+                'cust_name'         => $request->select_customer,
                 'order_quantity'    => $cartItem->qty,
                 'order_tax'         => $request->order_tax,
                 'order_subtotal'    => $request->order_subtotal,
@@ -67,7 +76,7 @@ class PaymentController extends Controller
                 'order_date'        => $this->date,
                 'user_name'         => $request->user_name
             ];
-            $updateQty = Product::where('pro_id', $cartItem->id);
+            $updateQty = $this->products->where('pro_id', $cartItem->id);
             $updateQty->decrement('pro_quantity', $cartItem->qty);
 
             Cart::remove($cartItem->rowId);
@@ -75,16 +84,6 @@ class PaymentController extends Controller
         $this->orders->insert($dataInsert);
         return redirect('admin/sellings');
 
-    }
-
-
-    /**
-     * @return \Illuminate\Http\Response
-     */
-    function fun_print()
-    {
-        $pdf = PDF::loadView('backend.payments.test');
-        return $pdf->download('invoice.pdf');
     }
 
     /**
@@ -95,7 +94,7 @@ class PaymentController extends Controller
      */
     public function edit()
     {
-        return view('backend.payments.test');
+        //
     }
 
     /**

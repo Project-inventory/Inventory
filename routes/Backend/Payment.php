@@ -2,7 +2,7 @@
 
 Route::group(['prefix' => 'payments', 'namespace' => 'Payment'], function (){
 
-    Route::get('', 'PaymentController@index')->name('payments.index1');
+    Route::get('', 'PaymentController@index')->name('payments.index');
     Route::get('create', 'PaymentController@create')->name('payments.create');
     Route::get('edit', 'PaymentController@edit')->name('payments.edit');
     Route::get('{fun_print', 'PaymentController@fun_print')->name('payments.fun_print');

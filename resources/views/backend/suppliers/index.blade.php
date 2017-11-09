@@ -1,5 +1,9 @@
 @extends('backend.layouts.app')
 
+@section('title')
+    Suppliers
+@endsection
+
 @section('after-styles')
     <style type="text/css">
         #suppliers-table_filter {
@@ -58,6 +62,31 @@
                     processing: true,
                     serverSide: true,
                     ajax: 'http://siyen.dev:8080/Inventory/public/admin/suppliers/get-suppliers',
+                    dom: 'Bfrtip',
+                    buttons: [
+                        {
+                            extend:    'copy',
+                            text:      '<i class="fa fa-files-o"></i> Copy',
+                            titleAttr: 'Copy'
+                        },
+                        {
+                            extend: 'excel',
+                            text:      '<i class="fa fa-file-excel-o"></i> Excel',
+                            titleAttr: 'Excel',
+                            title: 'List of Suppliers'
+                        },
+                        {
+                            extend: 'pdf',
+                            text:      '<i class="fa fa-file-pdf-o"></i> PDF',
+                            titleAttr: 'PDF',
+                            title: 'List of Suppliers'
+                        },
+                        {
+                            extend:    'print',
+                            text:      '<i class="fa fa-print" aria-hidden="true"></i> Print',
+                            titleAttr: 'Print'
+                        }
+                    ],
                     columns: [
                         {data: 0, name: 'ven_id'},
                         {data: 1, name: 'ven_name'},

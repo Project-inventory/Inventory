@@ -1,5 +1,9 @@
 @extends('backend.layouts.app')
 
+@section('title')
+    Products/Edit
+@endsection
+
 @section('page-header')
     <h1>Products<small>Edit the products record</small></h1>
     <ol class="breadcrumb">
@@ -119,9 +123,9 @@
                                 <div class="col-sm-4">
                                     <label for="group">Group</label>
                                     <select name="gp_id" id="gp_id" class="form-control">
-                                        <option value="{{$product->group->gp_id}}">{{$product->group->gp_name}}</option>
+                                        <option value="{{is_null($product->group)?'0':$product->group->gp_id}}">{{is_null($product->group)?'N/A':$product->group->gp_name}}</option>
                                         @foreach($groups as $group=>$value)
-                                            <option value="{{is_null($product->group)?'0': $product->group->gp_id}}">{{is_null($product->group)?'N/A': $product->group->gp_name}}</option>
+                                            <option value="{{$value->gp_id}}">{{$value->gp_name}}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -150,8 +154,8 @@
                         </div>
                         {{--------------------------------------------------------------------------------------------}}
                         <div class="box-footer pull-right" style="margin-top: 3%">
-                            <button type="submit" class="btn btn-primary btn-save mybtn">Update</button>
-                            <a href="{{ route('admin.products.index') }}" class="btn btn-danger btn-back mybtn">Back</a>
+                            <button type="submit" class="btn btn-primary btn-save mybtn"><i class="fa fa-upload" aria-hidden="true"></i> Update</button>
+                            <a href="{{ route('admin.products.index') }}" class="btn btn-danger btn-back mybtn"><i class="fa fa-reply" aria-hidden="true"></i> Back</a>
                         </div>
                     </form>
                 </div>
@@ -187,7 +191,6 @@
                             .width(228)
                             .height(203);
                 };
-
                 reader.readAsDataURL(input.files[0]);
             }
         }

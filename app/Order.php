@@ -10,7 +10,8 @@ class Order extends Model
 {
     protected $table = 'orders';
     protected $fillable = [ 'pro_id',
-                            'cust_id',
+                            'pro_name',
+                            'cust_name',
                             'order_quantity',
                             'order_tax',
                             'order_subtotal',
@@ -24,11 +25,11 @@ class Order extends Model
     public $timestamps = false;
     
     public function products() {
-        return $this->belongsToMany(Product::class, 'pro_id');
+        return $this->belongsTo(Product::class, 'pro_id');
     }
 
     public function customer() {
-        return $this->belongsToMany(Customer::class, 'cust_id');
+        return $this->belongsTo(Customer::class, 'cust_id');
     }
 
     public function user(){

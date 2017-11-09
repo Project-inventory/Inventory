@@ -97,7 +97,9 @@ class SellingController extends Controller
         $products = Product::select(['pro_id', 'pro_name', 'pro_quantity', 'pro_price']);
         return Datatables::of($products)
             ->addColumn('action', function ($product) {
-                return '<a href="'.route("admin.sellings.edit", $product->pro_id).'" class="btn btn-xs btn-primary btn-add-product">Add</a>';
+                return '<a href="'.route("admin.sellings.edit", $product->pro_id).'" class="btn btn-xs btn-primary btn-add-product" title="Add to Order List">
+                            <i class="fa fa-plus" aria-hidden="true"></i>
+                        </a>';
             })
             ->escapeColumns(['action'])
             ->editColumn('pro_price', '$ {{number_format($pro_price, 2)}}')
