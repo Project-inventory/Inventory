@@ -7,42 +7,57 @@
                 <h4 class="modal-title" id="myModalLabel">Product Details</h4>
             </div>
             <div class="modal-body">
-                <div class="row">
-                    <div class="box-left col-md-3">
-                        <p>Name :</p>
-                        <p>Product unit :</p>
-                        <p>Quantity :</p>
-                        <p>Storage Date :</p>
-                        <p>Price :</p>
-                        <p>Barcode :</p>
-                        <p>Expiry :</p>
-                        <p>Tax :</p><br>
-                    </div>
-                    <div class="box-right col-md-4">
-                        <p>{{ $product->pro_name }}</p>
-                        <p>{{ is_null($product->pro_unit)? 'N/A':$product->pro_unit }}</p>
-                        <p>{{ $product->pro_quantity }}</p>
-                        <p>{{ $product->pro_date_storage }}</p>
-                        <p>$ {{ number_format($product->pro_price ,2)}}</p>
-                        <p>{{ $product->pro_barcode }}</p>
-                        <p>{{ is_null($product->pro_expiry)?'N/A':$product->pro_expiry }}</p>
-                        <p>{{ is_null($product->pro_tax)? 'N/A':$product->pro_tax }}%</p><br>
-                    </div>
-                    <div class="col-md-5">
-                        <img src="{{url('/product_img/'.$product->pro_photo)}}" alt="Image"/>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-4">
-                        <p>Group : {{is_null($product->group)?'N/A': $product->group->gp_name}}</p>
-                    </div>
-                    <div class="col-md-4">
-                        <p>Category : {{is_null($product->category)?'N/A': $product->category->cat_name}}</p>
-                    </div>
-                    <div class="col-md-4">
-                        <p>Brand : {{is_null($product->brand)?'N/A': $product->brand->brand_name}}</p>
-                    </div>
-                </div>
+                <table class="table table-striped table-responsive">
+                    <tr>
+                        <td style="width: 30%"><b>Name :</b></td>
+                        <td style="width: 40%">{{ $product->pro_name }}</td>
+                        <td rowspan="8" style="width: 30%; text-align: center"><img src="{{url('/product_img/'.$product->pro_photo)}}" alt="Image"/></td>
+                    </tr>
+                    <tr>
+                        <td><b>Product unit :</b></td>
+                        <td>{{ is_null($product->pro_unit)? 'N/A':$product->pro_unit }}</td>
+                    </tr>
+                    <tr>
+                        <td><b>Quantity :</b></td>
+                        <td>{{ $product->pro_quantity }}</td>
+                    </tr>
+                    <tr>
+                        <td><b>Storage Date :</b></td>
+                        <td>{{ $product->pro_date_storage }}</td>
+                    </tr>
+                    <tr>
+                        <td><b>Price :</b></td>
+                        <td>$ {{ number_format($product->pro_price ,2)}}</td>
+                    </tr>
+                    <tr>
+                        <td><b>Barcode :</b></td>
+                        <td>{{ $product->pro_barcode }}</td>
+                    </tr>
+                    <tr>
+                        <td><b>Expiry :</b></td>
+                        <td>{{ is_null($product->pro_expiry)?'N/A':$product->pro_expiry }}</td>
+
+                    </tr>
+                    <tr>
+                        <td><b>Tax :</b></td>
+                        <td>{{ is_null($product->pro_tax)? 'N/A':$product->pro_tax }}%</td>
+                    </tr>
+                    <tr>
+                        <td><b>Brand :</b></td>
+                        <td>{{is_null($product->brand)?'N/A': $product->brand->brand_name}}</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td><b>Category :</b></td>
+                        <td>{{is_null($product->category)?'N/A': $product->category->cat_name}}</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td><b>Group :</b></td>
+                        <td>{{is_null($product->group)?'N/A': $product->group->gp_name}}</td>
+                        <td></td>
+                    </tr>
+                </table>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

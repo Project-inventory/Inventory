@@ -7,36 +7,56 @@
                 <h4 class="modal-title" id="myModalLabel">Sale Details</h4>
             </div>
             <div class="modal-body">
-                <div class="row">
-                    <div class="box-left col-md-3">
-                        <p>Product id :</p>
-                        <p>Product name :</p>
-                        <p>Customer name :</p>
-                        <p>Sale Quantity :</p>
-                        <p>Tax :</p>
-                        <p>Subtotal :</p>
-                        <p>Amount :</p>
-                        <p>Discount :</p>
-                        <p>Paid :</p>
-                        <p>Change :</p>
-                        <p>Date :</p>
-                        <p>Cashier :</p>
-                    </div>
-                    <div class="box-right col-md-9">
-                        <p>{{ $order->pro_id }}</p>
-                        <p>{{ $order->pro_name }}</p>
-                        <p>{{ is_null($order->cust_name)? 'N/A':$order->cust_name }}</p>
-                        <p>{{ $order->order_quantity}}</p>
-                        <p>$ {{ number_format($order->order_tax, 2) }}</p>
-                        <p>$ {{ number_format($order->order_subtotal, 2) }}</p>
-                        <p>$ {{ number_format($order->order_amount,2) }}</p>
-                        <p>{{ $order->discount }}%</p>
-                        <p>$ {{ number_format($order->paid, 2) }}</p>
-                        <p>$ {{ number_format($order->change, 2) }}</p>
-                        <p>{{ $order->order_date }}</p>
-                        <p>{{ $order->user_name }}</p>
-                    </div>
-                </div>
+                <table class="table table-striped table-responsive">
+                    <tr>
+                        <td><b>Product id :</b></td>
+                        <td>{{ $order->pro_id }}</td>
+                    </tr>
+                    <tr>
+                        <td><b>Product name :</b></td>
+                        <td>{{ $order->pro_name }}</td>
+                    </tr>
+                    <tr>
+                        <td><b>Customer name :</b></td>
+                        <td>{{ is_null($order->cust_name)? 'N/A':$order->cust_name }}</td>
+                    </tr>
+                    <tr>
+                        <td><b>Sale Quantity :</b></td>
+                        <td>{{ $order->order_quantity}}</td>
+                    </tr>
+                    <tr>
+                        <td><b>Tax :</b></td>
+                        <td>$ {{ number_format($order->order_tax, 2) }}</td>
+                    </tr>
+                    <tr>
+                        <td><b>Subtotal :</b></td>
+                        <td>$ {{ number_format($order->order_subtotal, 2) }}</td>
+                    </tr>
+                    <tr>
+                        <td><b>Amount :</b></td>
+                        <td>$ {{ number_format($order->order_amount,2) }}</td>
+                    </tr>
+                    <tr>
+                        <td><b>Discount :</b></td>
+                        <td>{{ $order->discount }}%</td>
+                    </tr>
+                    <tr>
+                        <td><b>Paid :</b></td>
+                        <td>$ {{ number_format($order->paid, 2) }}</td>
+                    </tr>
+                    <tr>
+                        <td><b>Change :</b></td>
+                        <td>$ {{ number_format($order->change, 2) }}</td>
+                    </tr>
+                    <tr>
+                        <td><b>Date :</b></td>
+                        <td>{{ $order->order_date }}</td>
+                    </tr>
+                    <tr>
+                        <td><b>Cashier :</b></td>
+                        <td>{{ $order->user_name }}</td>
+                    </tr>
+                </table>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

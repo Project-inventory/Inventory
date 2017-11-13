@@ -44,8 +44,8 @@
                                     <div class="form-group">
                                         <label for="sex">Gender</label>
                                         <select name="cust_gender" id="cust_gender" class="form-control" required>
-                                            <option value="male">Male</option>
-                                            <option value="female">Female</option>
+                                            <option value="Male">Male</option>
+                                            <option value="Female">Female</option>
                                         </select>
                                     </div>
                                 </div>

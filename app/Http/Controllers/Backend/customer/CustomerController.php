@@ -67,9 +67,10 @@ class CustomerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show()
     {
-        //
+        $customers = $this->customers->all();
+        return view('backend.customers.show', compact('customers'));
     }
 
     /**
@@ -136,7 +137,7 @@ class CustomerController extends Controller
         return back();
     }
 
-    public function getCustomer()
+    protected function getCustomer()
     {
         $customers = Customer::select(['cust_id', 'cust_name', 'cust_gender', 'cust_tel']);
         return Datatables::of($customers)
@@ -144,6 +145,18 @@ class CustomerController extends Controller
                 return '<button class="btn btn-info btn-xs" data-toggle="modal" data-target="#view'.$customer->cust_id.'"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></button>
                 <a href="'.route("admin.customers.edit", $customer->cust_id).'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i></a>
                 <a href="'.route("admin.customers.delete", $customer->cust_id).'" class="btn btn-xs btn-danger"><i class="glyphicon glyphicon-trash"></i></a>';
+            })
+            ->escapeColumns(['action'])
+            ->make();
+    }
+    
+    protected function getCustomerMember()
+    {
+        $customers = Customer::select(['cust_id', 'cust_name', 'cust_gender', 'cust_tel', 'status'])->where('status', '=', 'member');
+        return Datatables::of($customers)
+            ->addColumn('action', function ($customer) {
+                return '<button class="btn btn-info btn-xs" data-toggle="modal" data-target="#view'.$customer->cust_id.'"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></button>
+                <a href="'.route("admin.customers.edit", $customer->cust_id).'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i></a>';
             })
             ->escapeColumns(['action'])
             ->make();

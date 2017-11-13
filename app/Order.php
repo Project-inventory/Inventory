@@ -20,7 +20,8 @@ class Order extends Model
                             'discount',
                             'lack',
                             'order_date',
-                            'user_name' ];
+                            'user_name',
+                            'create_at'];
     protected $primaryKey = 'order_id';
     public $timestamps = false;
     

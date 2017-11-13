@@ -12,6 +12,9 @@
         #sales-table_length{
             float: left;
         }
+        .my_class {
+            display: none;
+        }
     </style>
 @endsection
 
@@ -32,7 +35,7 @@
             <table class="table table-striped" id="sales-table">
                 <thead>
                 <tr>
-                    <th>ID</th>
+                    <th hidden>#</th>
                     <th>Product id</th>
                     <th>Product name</th>
                     <th>Customer name</th>
@@ -94,7 +97,7 @@
                         dataSrc: 5
                     },
                     columns: [
-                        {data: 0, name: 'order_id'},
+                        { className: "my_class", "targets": [ 0 ] },
                         {data: 1, name: 'pro_id'},
                         {data: 2, name: 'pro_name'},
                         {data: 3, name: 'cust_name'},

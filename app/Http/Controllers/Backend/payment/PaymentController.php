@@ -11,12 +11,13 @@ use App\Http\Controllers\Controller;
 
 class PaymentController extends Controller
 {
-    private $products, $date, $orders, $customers;
+    private $products, $date, $orders, $customers, $create_date;
     public function __construct( Product $products, Order $orders, Customer $customers){
         $this->orders  = $orders;
         $this->customers = $customers;
         $this->products = $products;
         $this->date = date('Y-m-d H:i:s');
+        $this->create_date = date('Y-m-d');
     }
     /**
      * Display a listing of the resource.
@@ -74,7 +75,8 @@ class PaymentController extends Controller
                 'paid'              => $request->paid,
                 'change'            => $request->change,
                 'order_date'        => $this->date,
-                'user_name'         => $request->user_name
+                'user_name'         => $request->user_name,
+                'create_at'         => $this->create_date
             ];
             $updateQty = $this->products->where('pro_id', $cartItem->id);
             $updateQty->decrement('pro_quantity', $cartItem->qty);

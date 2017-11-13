@@ -7,40 +7,40 @@
                 <h4 class="modal-title" id="myModalLabel">Supplier Details</h4>
             </div>
             <div class="modal-body">
-                <div class="row">
-                    <div class="box-left col-md-3">
-                        <p>Name :</p>
-                        <p>Company name :</p>
-                        <p>Tel :</p>
-                        <p>Website :</p>
-                        <p>Creates Date :</p>
-                        <p>Address :</p>
-                    </div>
-                    <div class="box-right col-md-9">
-                        <p>{{ $supplier->ven_name }}</p>
-                        <p>{{ is_null($supplier->ven_company)? 'N/A':$supplier->ven_company }}</p>
-                        <p>{{$supplier->ven_tel}}</p>
-                        <p>{{ is_null($supplier->ven_website)? 'N/A':$supplier->ven_website }}</p>
-                        <p>{{$supplier->insert_date}}</p>
-                        <address>{{ is_null($supplier->ven_address)? 'N/A':$supplier->ven_address }}</address>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-3">
-                        <p>Status :</p>
-                    </div>
-                    <div class="col-md-9">
-                        <p>{{ is_null($supplier->ven_status)? 'N/A':$supplier->ven_status }}</p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-3">
-                        <p>Description :</p>
-                    </div>
-                    <div class="col-md-9">
-                        <p>{{ is_null($supplier->ven_description)? 'N/a':$supplier->ven_description }}</p>
-                    </div>
-                </div>
+                <table class="table table-striped table-responsive">
+                    <tr>
+                        <td style="width: 25%"><b>Name :</b></td>
+                        <td>{{ $supplier->ven_name }}</td>
+                    </tr>
+                    <tr>
+                        <td><b>Company name :</b></td>
+                        <td>{{ is_null($supplier->ven_company)? 'N/A':$supplier->ven_company }}</td>
+                    </tr>
+                    <tr>
+                        <td><b>Tel :</b></td>
+                        <td>{{$supplier->ven_tel}}</td>
+                    </tr>
+                    <tr>
+                        <td><b>Website :</b></td>
+                        <td>{{ is_null($supplier->ven_website)? 'N/A':$supplier->ven_website }}</td>
+                    </tr>
+                    <tr>
+                        <td><b>Created Date :</b></td>
+                        <td>{{$supplier->insert_date}}</td>
+                    </tr>
+                    <tr>
+                        <td><b>Address :</b></td>
+                        <td>{{ is_null($supplier->ven_address)? 'N/A':$supplier->ven_address }}</td>
+                    </tr>
+                    <tr>
+                        <td><b>Status :</b></td>
+                        <td>{{ is_null($supplier->ven_status)? 'N/A':$supplier->ven_status }}</td>
+                    </tr>
+                    <tr>
+                        <td><b>Description :</b></td>
+                        <td>{{ is_null($supplier->ven_description)? 'N/a':$supplier->ven_description }}</td>
+                    </tr>
+                </table>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

@@ -83,7 +83,8 @@
                         </p>
                     </div>
                     <div class="col-xs-6 col-md-6">
-                        <p class="lead">Amount Due {{date('Y-m-d H:i:s')}}</p>
+                        <h4 class="lead"><b>Issued Date:</b> {{date('Y-m-d H:i:s')}}</h4>
+                        <h4><b>Cashier:</b> {{ access()->user()->full_name }}</h4>
                         <div class="table-responsive">
                             <table class="table">
                                 <tbody>
@@ -132,7 +133,7 @@
                         </div>
                     </div>
                     <div class="pull-right">
-                        <button class="btn btn-success" type="submit"><i class="fa fa-credit-card" aria-hidden="true"></i> Submit Payment</button>
+                        <button class="btn btn-success btn-submit-payment" type="submit"><i class="fa fa-credit-card" aria-hidden="true"></i> Submit Payment</button>
                         <a href="{{ route('admin.sellings.index') }}" class="btn btn-danger"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</a>
                     </div>
                 </div>
@@ -178,8 +179,11 @@
             if( $('.change').val() < 0 ) {
 
                 $('.change').css('color', 'red');
+                $('.btn-submit-payment').prop('disabled', true);
+
             }else {
                 $('.change').css('color', 'black');
+                $('.btn-submit-payment').prop('disabled', false);
             }
         });
         //==============================================================================================================
@@ -187,5 +191,6 @@
             placeholder: 'select a name',
             allowClear: true
         });
+
     </script>
 @endsection

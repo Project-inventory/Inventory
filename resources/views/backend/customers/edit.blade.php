@@ -45,11 +45,11 @@
                                         <label for="sex">Gender</label>
                                         <select name="cust_gender" id="cust_gender" class="form-control">
                                             @if($customer->cust_gender == 'male')
-                                                <option value="male" selected>Male</option>
-                                                <option value="female">Female</option>
+                                                <option value="Male" selected>Male</option>
+                                                <option value="Female">Female</option>
                                             @else
-                                                <option value="male">Male</option>
-                                                <option value="female" selected>Female</option>
+                                                <option value="Male">Male</option>
+                                                <option value="Female" selected>Female</option>
                                             @endif
                                         </select>
                                     </div>

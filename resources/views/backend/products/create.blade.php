@@ -112,7 +112,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="tax">Tax</label>
-                                    <input type="number" name="pro_tax" id="pro_tax" class="form-control">
+                                    <input type="text" name="pro_tax" id="pro_tax" class="form-control">
                                 </div>
                             </div>
 

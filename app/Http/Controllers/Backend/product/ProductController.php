@@ -83,9 +83,10 @@ class ProductController extends Controller
     /**
      * @param $id
      */
-    public function show($id)
+    public function show()
     {
-
+        $products = $this->products->all();
+        return view('backend.products.show', compact('products'));
     }
 
     /**
@@ -162,7 +163,7 @@ class ProductController extends Controller
         return back();
     }
     
-    public function getProduct() {
+    protected function getProduct() {
         
         $products = Product::select(['pro_id', 'pro_name', 'pro_quantity', 'pro_barcode']);
         return Datatables::of($products)
@@ -170,12 +171,28 @@ class ProductController extends Controller
                 return '<button class="btn btn-info btn-xs" data-toggle="modal" data-target="#view'.$product->pro_id.'">
                             <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
                         </button>
-                <a href="'.route("admin.products.edit", $product->pro_id).'" class="btn btn-xs btn-primary">
-                    <i class="glyphicon glyphicon-edit"></i>
-                </a>
-                <a href="'.route("admin.products.delete", $product->pro_id).'" class="btn btn-xs btn-danger">
-                    <i class="glyphicon glyphicon-trash"></i>
-                </a>';
+                        <a href="'.route("admin.products.edit", $product->pro_id).'" class="btn btn-xs btn-primary">
+                            <i class="glyphicon glyphicon-edit"></i>
+                        </a>
+                        <a href="'.route("admin.products.delete", $product->pro_id).'" class="btn btn-xs btn-danger">
+                            <i class="glyphicon glyphicon-trash"></i>
+                        </a>';
+            })
+            ->escapeColumns(['action'])
+            ->make();
+    }
+
+    protected function getLowProduct() {
+
+        $products = Product::select(['pro_id', 'pro_name', 'pro_quantity', 'pro_barcode'])->where('pro_quantity', '<=', 10);
+        return Datatables::of($products)
+            ->addColumn('action', function ($product) {
+                return '<button class="btn btn-info btn-xs" data-toggle="modal" data-target="#view'.$product->pro_id.'">
+                            <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
+                        </button>
+                        <a href="'.route("admin.products.edit", $product->pro_id).'" class="btn btn-xs btn-primary">
+                            <i class="glyphicon glyphicon-edit"></i>
+                        </a>';
             })
             ->escapeColumns(['action'])
             ->make();

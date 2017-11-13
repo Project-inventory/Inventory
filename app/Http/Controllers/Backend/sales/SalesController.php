@@ -95,7 +95,7 @@ class SalesController extends Controller
     public function getSales ()
     {
         $orders = $this->orders
-            ->select(['order_id', 'pro_id', 'pro_name', 'cust_name', 'order_quantity', 'order_date']);
+            ->select(['order_id','pro_id', 'pro_name', 'cust_name', 'order_quantity', 'order_date']);
         return Datatables::of($orders)
             ->addColumn('action', function ($order) {
                 return '<button class="btn btn-info btn-xs" data-toggle="modal" data-target="#view'.$order->order_id.'"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></button>';

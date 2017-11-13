@@ -19,7 +19,7 @@
             <!-- small box -->
             <div class="small-box bg-aqua">
                 <div class="inner">
-                    <h3>{{$count_product}}</h3>
+                    <h3>{{is_null($count_product)? '0':$count_product}}</h3>
 
                     <p>Products</p>
                 </div>
@@ -37,7 +37,7 @@
             <!-- small box -->
             <div class="small-box bg-yellow">
                 <div class="inner">
-                    <h3>{{$count_customer}}</h3>
+                    <h3>{{is_null($count_customer)?'0':$count_customer}}</h3>
 
                     <p>Customers</p>
                 </div>
@@ -55,7 +55,7 @@
             <!-- small box -->
             <div class="small-box bg-red">
                 <div class="inner">
-                    <h3>{{$count_supplier}}</h3>
+                    <h3>{{is_null($count_supplier)?'0':$count_supplier}}</h3>
 
                     <p>Suppliers</p>
                 </div>
@@ -72,7 +72,7 @@
             <!-- small box -->
             <div class="small-box bg-green">
                 <div class="inner">
-                    <h3>{{$count_sale}}</h3>
+                    <h3>{{is_null($count_sale)?'0':$count_sale}}</h3>
 
                     <p>Sales</p>
                 </div>
@@ -87,7 +87,7 @@
     </div>
     {{--============================================================================================================--}}
     <div class="row">
-        <div class="col-md-8">
+        <div class="col-md-12 col-xs-12">
             <div class="box box-primary">
                 <div class="box-header with-border">
                     <i class="fa fa-align-left" aria-hidden="true"></i>
@@ -101,8 +101,8 @@
 
                 <div class="box-body">
                     <div class="progress-group">
-                        <span class="progress-text">Products has Low Quantity in Stock</span>
-                        <span class="progress-number"><b>{{$count_lowProduct}}</b>/{{$count_product}}</span>
+                        <span class="progress-text"><a href="{{ route('admin.products.show') }}">Products has Low Quantity in Stock</a></span>
+                        <span class="progress-number"><b>{{is_null($count_lowProduct)?'0':$count_lowProduct}}</b>/{{is_null($count_product)?'0':$count_product}}</span>
 
                         <div class="progress">
                             <div class="progress-bar progress-bar-warning progress-bar-striped" style="width: {{$lowProducts}}%"></div>
@@ -110,8 +110,8 @@
                     </div>
                     <!-- /.progress-group -->
                     <div class="progress-group">
-                        <span class="progress-text">Members</span>
-                        <span class="progress-number"><b>{{$count_member}}</b>/{{$count_customer}}</span>
+                        <span class="progress-text"><a href="{{ route('admin.customers.show') }}">Members</a></span>
+                        <span class="progress-number"><b>{{is_null($count_member)?'0':$count_member}}</b>/{{is_null($count_customer)?'0':$count_customer}}</span>
 
                         <div class="progress">
                             <div class="progress-bar progress-bar-success progress-bar-striped" style="width: {{$members}}%"></div>
@@ -164,7 +164,7 @@
 
                 <div class="info-box-content">
                     <span class="info-box-text">Categories</span>
-                    <span class="info-box-number">Total: {{$count_category}}</span>
+                    <span class="info-box-number">Total: {{is_null($count_category)?'0':$count_category}}</span>
                 </div>
                 <!-- /.info-box-content -->
             </div>
@@ -177,7 +177,7 @@
 
                 <div class="info-box-content">
                     <span class="info-box-text">Groups</span>
-                    <span class="info-box-number">Total: {{$count_group}}</span>
+                    <span class="info-box-number">Total: {{is_null($count_group)?'0':$count_group}}</span>
                 </div>
                 <!-- /.info-box-content -->
             </div>
@@ -192,22 +192,28 @@
 @section('after-scripts')
     <script type="text/javascript">
         $(function () {
+            var data_monthlySales = <?php echo $monthly_sale; ?>;
+            var data_months = <?php echo $months; ?>;
+            var months = [];
+            for (var i=0; i<data_months.length; i++ ) {
+                months.push(data_months[i].month);
+            }
             var myChart = Highcharts.chart('container1', {
                 chart: {
                     type: 'line'
                 },
                 title: {
-                    text: 'Monthly Average Temperature'
+                    text: 'Monthly Sales List'
                 },
                 subtitle: {
-                    text: 'Source: WorldClimate.com'
+                    text: 'Source: report sales product'
                 },
                 xAxis: {
-                    categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+                    categories: months,
                 },
                 yAxis: {
                     title: {
-                        text: 'Temperature (°C)'
+                        text: 'Number of Sales'
                     }
                 },
                 plotOptions: {
@@ -219,11 +225,8 @@
                     }
                 },
                 series: [{
-                    name: 'Tokyo',
-                    data: [7.0, 6.9, 9.5, 14.5, 18.4, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6]
-                }, {
-                    name: 'London',
-                    data: [3.9, 4.2, 5.7, 8.5, 11.9, 15.2, 17.0, 16.6, 14.2, 10.3, 6.6, 4.8]
+                    name: 'Sales Product',
+                    data: data_monthlySales
                 }]
             });
         })

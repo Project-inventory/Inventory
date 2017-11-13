@@ -35,7 +35,7 @@
             <table class="table table-striped" id="suppliers-table">
                 <thead>
                 <tr>
-                    <th>#</th>
+                    <th>ID</th>
                     <th>Name</th>
                     <th>Address</th>
                     <th>Telephone</th>
